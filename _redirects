@@ -1,0 +1,23 @@
+# Redirects van de oude vemat.nl-structuur naar de nieuwe website.
+# Cloudflare Pages leest dit bestand automatisch (_redirects, Netlify-syntax).
+# Formaat: oud-pad  nieuw-pad  statuscode
+
+/Home/                /                      301
+/Home                 /                      301
+/Management/          /management.html       301
+/Management           /management.html       301
+/Advies/              /advies.html           301
+/Advies               /advies.html            301
+/Training/            /training.html         301
+/Training             /training.html         301
+/Over-van-Engelen/    /over-ons.html         301
+/Over-van-Engelen     /over-ons.html         301
+/Partners/            /over-ons.html         301
+/Partners             /over-ons.html         301
+/Klanten/             /over-ons.html         301
+/Klanten              /over-ons.html         301
+/Contact/             /contact.html          301
+/Contact              /contact.html          301
+
+# Vangnet voor overige, onbekende oude URL's
+/*                    /404.html              404
