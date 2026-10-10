@@ -17,30 +17,30 @@ bijsnedes voor verschillende plekken op de site):
 (`frank-portrait.webp`) is een bijsnede van de aangeleverde handdruk-foto,
 niet een bevestigd, apart portret van Frank van Engelen. We konden niet
 met zekerheid vaststellen wie van de twee mensen op die foto Frank is.
-Op de pagina staat daarom expliciet het bijschrift *"Foto ter illustratie —
-een portret van Frank van Engelen volgt nog."* zodat er niets wordt
+Op de pagina staat daarom expliciet het bijschrift *"Foto ter illustratie.
+Een portret van Frank van Engelen volgt nog."* zodat er niets wordt
 beweerd dat niet zeker is.
 
 ## Wat is er nog nodig voor een definitieve, professionele site
 
 1. **Een eigen portretfoto van Frank van Engelen** (zakelijk, het liefst
-   staand of halve-lijf, goede belichting) — voor de "Over
+   staand of halve-lijf, goede belichting), voor de "Over
    ons"-pagina en eventueel voor gebruik in Open Graph-afbeeldingen
    (hoe de site eruitziet wanneer een link gedeeld wordt op LinkedIn,
    WhatsApp, etc.).
 2. **Eén of meer foto's specifiek van interim management / advieswerk**
    (bijvoorbeeld: Frank of een collega in overleg met een klant op
-   locatie) — nu hergebruikt we de trainingsfoto hiervoor, wat prima
+   locatie). Nu hergebruiken we de trainingsfoto hiervoor, wat prima
    werkt maar niet 100% specifiek is.
 3. **Een vierkante of liggende versie van het logo** met voldoende
    witruimte, voor gebruik als Open Graph-afbeelding en eventueel een
-   apart favicon-bestand (`.ico` of `.png`) — nu wordt het logo zelf
+   apart favicon-bestand (`.ico` of `.png`). Nu wordt het logo zelf
    als favicon gebruikt, wat werkt maar niet geoptimaliseerd is.
 4. **Optioneel: teamfoto's of sfeerfoto's** als er in de toekomst een
    uitgebreidere "Klanten" of "Partners"-pagina komt. Zoals
    afgesproken zijn deze pagina's nu bewust *niet* gebouwd omdat de
    huidige website geen namen, logo's of testimonials van klanten of
-   partners bevat — die pagina's waren op de bestaande site nog lege
+   partners bevat: die pagina's waren op de bestaande site nog lege
    sjabloonpagina's. Zodra Van Engelen hier concrete inhoud voor kan
    aanleveren, bouwen we deze pagina's graag alsnog.
 

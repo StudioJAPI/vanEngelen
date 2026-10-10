@@ -1,9 +1,9 @@
 # SEO &amp; GEO-overzicht
 
 Dit document legt uit wat er technisch is gedaan om de website goed
-vindbaar te maken — zowel in traditionele zoekmachines (Google, Bing;
+vindbaar te maken: zowel in traditionele zoekmachines (Google, Bing,
 "SEO") als in AI-zoeksystemen en chatbots (ChatGPT, Perplexity,
-Google AI Overviews; "GEO" — Generative Engine Optimization).
+Google AI Overviews, "GEO": Generative Engine Optimization).
 
 ## 1. Techniek per pagina
 
@@ -49,7 +49,7 @@ AI-zoeksystemen citeren bij voorkeur bronnen die concreet en
 verifieerbaar zijn. Daarom:
 
 - Bevat de site geen verzonnen klantaantallen, certificeringen,
-  beoordelingen of resultaten — alleen wat daadwerkelijk bekend is
+  beoordelingen of resultaten: alleen wat daadwerkelijk bekend is
   (zoals "ruim 15 jaar ervaring").
 - Zijn onbekende antwoorden in de FAQ expliciet gemarkeerd als "nog te
   verifiëren met de klant" in plaats van verzonnen te worden. Dat is
@@ -58,17 +58,17 @@ verifieerbaar zijn. Daarom:
 
 ## 4. Technische bestanden
 
-- **`sitemap.xml`** — lijst van alle 10 publieke pagina's (exclusief
+- **`sitemap.xml`**: lijst van alle 10 publieke pagina's (exclusief
   404), voor Google Search Console.
-- **`robots.txt`** — staat alle zoekmachines toe en verwijst naar de
+- **`robots.txt`**: staat alle zoekmachines toe en verwijst naar de
   sitemap.
-- **`_redirects`** — zorgt dat oude URL's van vemat.nl niet op een
+- **`_redirects`**: zorgt dat oude URL's van vemat.nl niet op een
   foutmelding uitkomen (zie `REDIRECTS.md`).
 
 ## 5. Prestaties (Core Web Vitals)
 
-- Eén lettertype-familie via één Google Fonts-verzoek, met
-  `preconnect` naar de lettertype-servers.
+- Beide lettertype-families (IBM Plex Sans en Inter) via één gebundeld
+  Google Fonts-verzoek, met `preconnect` naar de lettertype-servers.
 - Afbeeldingen zijn gecomprimeerd naar WebP en voorzien van
   `width`/`height`-attributen, zodat de pagina niet "springt" tijdens
   het laden (voorkomt een slechte Cumulative-Layout-Shift-score).
@@ -81,7 +81,7 @@ verifieerbaar zijn. Daarom:
 ## 6. Wat nog moet gebeuren na livegang
 
 - Domein indienen bij Google Search Console en Bing Webmaster Tools.
-- Google Business Profile aanmaken/koppelen (lokale SEO) — hiervoor is
+- Google Business Profile aanmaken/koppelen (lokale SEO): hiervoor is
   een adres nodig, dat nu nog ontbreekt (zie `PROJECTDOCUMENTATIE.md`).
 - Na een paar weken de Core Web Vitals controleren via
   PageSpeed Insights / Search Console, nu de site écht online staat.

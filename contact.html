@@ -77,8 +77,8 @@
         </ul>
       </nav>
       <div class="header-actions">
-        <a class="btn btn-outline" href="mailto:frank@vemat.nl" data-cursor="Mailen">frank@vemat.nl</a>
-        <div class="magnetic"><a class="btn btn-primary" href="contact.html" data-cursor="Plannen">Plan een gesprek</a></div>
+        <a class="btn btn-outline" href="mailto:frank@vemat.nl">frank@vemat.nl</a>
+        <div class="magnetic"><a class="btn btn-primary" href="contact.html">Plan een gesprek</a></div>
         <button class="menu-toggle" aria-expanded="false" aria-controls="mobile-nav" aria-label="Menu openen">
           <span></span><span></span><span></span>
         </button>
@@ -103,12 +103,12 @@
   <div class="page-header container">
     <span class="label fade-in-up">Contact</span>
     <h1 class="fade-in-up">Laten we kennismaken.</h1>
-    <p class="lead fade-in-up">Vul het formulier in of mail rechtstreeks &mdash; we reageren zo snel mogelijk.</p>
+    <p class="lead fade-in-up">Vul het formulier in of mail rechtstreeks: we reageren zo snel mogelijk.</p>
   </div>
 
   <section class="section">
     <div class="container" style="display:grid; grid-template-columns: 1fr 1.3fr; gap: clamp(32px,6vw,72px); align-items:start;">
-      <div class="fade-in-up">
+      <div data-reveal>
         <h2>Contactgegevens</h2>
         <div class="contact-info" style="margin-top:24px;">
           <div class="contact-info-item">
@@ -122,7 +122,7 @@
         </div>
         <p style="margin-top:28px;">Adres en telefoonnummer volgen zodra deze door Van Engelen zijn aangeleverd.</p>
       </div>
-      <form class="fade-in-up" data-contact-form action="https://formspree.io/f/FORMSPREE_ENDPOINT" method="POST">
+      <form data-reveal data-contact-form action="https://formspree.io/f/FORMSPREE_ENDPOINT" method="POST">
         <div class="form-grid">
           <div class="form-field">
             <label for="voornaam">Voornaam</label>
@@ -145,9 +145,9 @@
             <textarea id="bericht" name="bericht" rows="5"></textarea>
           </div>
         </div>
-        <p class="form-note">Vul alle verplichte velden in. We gebruiken uw gegevens alleen om contact met u op te nemen &mdash; zie onze <a class="text-link" href="privacy.html">privacyverklaring</a>.</p>
+        <p class="form-note">Vul alle verplichte velden in. We gebruiken uw gegevens alleen om contact met u op te nemen. Zie onze <a class="text-link" href="privacy.html">privacyverklaring</a>.</p>
         <div class="form-submit">
-          <div class="magnetic"><button class="btn btn-primary" type="submit" data-cursor="Versturen">Verstuur bericht</button></div>
+          <div class="magnetic"><button class="btn btn-primary" type="submit">Verstuur bericht</button></div>
         </div>
         <div class="form-status" role="status"></div>
       </form>

@@ -1,7 +1,7 @@
-# Website Van Engelen Management, Advies en Training — projectlevering
+# Website Van Engelen Management, Advies en Training: projectlevering
 
 Gebouwd door Studio JAPI. Deze uitleg is geschreven voor iemand die niet kan
-programmeren — geen technische voorkennis nodig.
+programmeren: geen technische voorkennis nodig.
 
 ## 1. Wat zit er in deze ZIP?
 
@@ -33,38 +33,44 @@ assets/images/        → Alle gebruikte foto's en het logo
 
 Dubbelklik op `index.html`. De website opent in uw browser en werkt
 volledig, ook zonder internetverbinding (de lettertypen worden dan
-vervangen door een systeemlettertype — zodra de site online staat,
+vervangen door een systeemlettertype, zodra de site online staat,
 worden automatisch de juiste lettertypen geladen).
 
 ## 3. Wat is er anders dan de huidige website (vemat.nl)?
 
-- **Vormgeving**: een rustige, redactionele uitstraling met een serif
-  kop-lettertype (Fraunces) en een strakke, sans-serif tekst (Inter),
-  in plaats van het standaardsjabloon van de huidige site.
+- **Vormgeving**: een strakke, moderne uitstraling met sans-serif
+  lettertypen (IBM Plex Sans voor koppen, Inter voor lopende tekst) en
+  de rode VEMAT-huisstijlkleur die duidelijk door de hele site
+  terugkomt, in plaats van het standaardsjabloon van de huidige site.
 - **Structuur**: elke dienst (Training, Advies, Interim management)
   heeft nu een eigen, volwaardige pagina in plaats van één korte
-  tekstblok. Er is een duidelijke "Diensten"-overzichtspagina en een
-  uitgebreide FAQ-pagina toegevoegd.
-- **Interactie**: een aangepaste muiscursor, een "meebewegend" verhaal
-  bij de drie diensten op de homepage (scroll er doorheen), een
-  uitklapbare FAQ, en knoppen die licht met de muis meebewegen. Dit
-  werkt alleen op desktop met een muis — op een telefoon of tablet
-  ziet u gewoon de gewone, toegankelijke bediening.
+  tekstblok. Er is een opnieuw ontworpen "Diensten"-overzichtspagina
+  met grote, afwisselende contentsecties en een uitgebreide
+  FAQ-pagina toegevoegd.
+- **Interactie en beweging**: een subtiele, minimalistische
+  muiscursor, vloeiende scrollanimaties door de hele site (secties die
+  in beeld bewegen, staggered animaties, een subtiel parallax-effect),
+  een "meebewegend" verhaal bij de drie diensten op de homepage (scroll
+  er doorheen), een uitklapbare FAQ, en knoppen die licht met de muis
+  meebewegen. De cursor en parallax werken alleen op desktop met een
+  muis, op een telefoon of tablet ziet u gewoon de gewone, toegankelijke
+  bediening, en alle animaties houden rekening met bezoekers die
+  "verminderde beweging" hebben ingesteld.
 - **Vindbaarheid**: elke pagina heeft een eigen titel, omschrijving en
   gestructureerde data voor Google (en voor AI-zoekassistenten zoals
   ChatGPT of Perplexity). Zie `SEO-GEO-OVERZICHT.md` voor details.
 
 ## 4. Wat moet er nog gebeuren voordat de site live kan?
 
-Zie **`FOTOS-NODIG.md`** voor ontbrekende foto's en **
-`PROJECTDOCUMENTATIE.md`** voor het volledige overzicht van open punten
-— onder andere:
+Zie **`FOTOS-NODIG.md`** voor ontbrekende foto's en
+**`PROJECTDOCUMENTATIE.md`** voor het volledige overzicht van open
+punten, onder andere:
 
 - Een eigen portretfoto van Frank van Engelen (nu wordt tijdelijk de
   aangeleverde "handdruk"-foto hergebruikt, duidelijk gelabeld als
   placeholder).
 - Telefoonnummer, adres en eventueel KvK-nummer (stonden niet op de
-  huidige website — alleen `frank@vemat.nl` is bevestigd).
+  huidige website, alleen `frank@vemat.nl` is bevestigd).
 - Een werkende koppeling voor het contactformulier (nu staat er een
   tijdelijke placeholder-link naar Formspree, zie punt 6 hieronder).
 - De definitieve tekst voor de privacyverklaring en het cookiebeleid
@@ -84,7 +90,7 @@ Deze site is gebouwd volgens de Studio JAPI-standaardstack:
 ## 6. Het contactformulier activeren
 
 Het formulier op `contact.html` is voorbereid voor **Formspree**
-(een betrouwbare, externe formulierdienst — geen eigen server nodig).
+(een betrouwbare, externe formulierdienst: geen eigen server nodig).
 Om het echt te laten werken:
 
 1. Maak een gratis of betaald account op formspree.io.
@@ -103,7 +109,7 @@ alternatief.
 
 Voeg na livegang Google Analytics 4 en Google Search Console toe
 (beide gratis). Zodra dat gebeurt, moet `cookiebeleid.html` worden
-aangevuld — zie de opmerking die al op die pagina staat.
+aangevuld: zie de opmerking die al op die pagina staat.
 
 ## 8. Vragen?
 

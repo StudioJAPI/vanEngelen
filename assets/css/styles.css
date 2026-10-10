@@ -1,14 +1,18 @@
 /* ==========================================================================
-   Van Engelen — Management, Advies en Training
-   Design system — Studio JAPI
+   Van Engelen: Management, Advies en Training
+   Design system, Studio JAPI
 
-   Richting: redactioneel/zakelijk zelfverzekerd. Haarlijnen i.p.v. kaarten,
-   een serif voor koppen i.p.v. een grotesk, rood als zeldzaam accent i.p.v.
-   een gevulde kleur. Eén bewust geregisseerd bewegingsmoment (de
-   scroll-vertelling bij de diensten); de rest is rustig en functioneel.
+   Richting: strak, zakelijk en premium. Een geometrische sans-serif voor
+   koppen (IBM Plex Sans) gecombineerd met Inter voor lopende tekst. De
+   rode huisstijlkleur wordt doelbewust prominent ingezet: in knoppen,
+   lijnen, cijfers, hover-states en grote vlakken, maar altijd gedragen
+   door een rustige, strakke basis. Beweging zit overal: een doorlopend
+   scroll-reveal-systeem, subtiele parallax en een sticky scroll-vertelling
+   bij de diensten, allemaal met een nette fallback zonder JavaScript en
+   met respect voor prefers-reduced-motion.
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,380..620;1,9..144,380..620&family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
 
 :root {
   /* Kleur */
@@ -24,17 +28,19 @@
   --text-on-ink: #F3F1EA;
   --text-on-ink-muted: #AFAA9F;
   --red: #E51922;
-  --red-deep: #9C1019;
+  --red-deep: #B4121A;
   --red-tint: #FBE7E6;
+  --red-tint-strong: #F7C9C9;
 
   /* Type */
-  --font-display: 'Fraunces', 'Iowan Old Style', Georgia, serif;
+  --font-display: 'IBM Plex Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 
   /* Layout */
   --container: 1240px;
   --gutter: clamp(20px, 5vw, 64px);
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -75,8 +81,8 @@ h1, h2, h3, h4, p, figure { margin: 0; }
   position: absolute;
   left: -9999px;
   top: 0;
-  background: var(--ink);
-  color: var(--text-on-ink);
+  background: var(--red);
+  color: #fff;
   padding: 14px 22px;
   z-index: 1000;
   font-weight: 600;
@@ -94,22 +100,22 @@ h1, h2, h3, h4, p, figure { margin: 0; }
    ========================================================================== */
 h1, h2, h3 {
   font-family: var(--font-display);
-  font-weight: 560;
-  line-height: 1.06;
-  letter-spacing: -0.01em;
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
   text-wrap: balance;
 }
-h1 { font-size: clamp(2.6rem, 5.6vw, 4.8rem); font-weight: 520; }
-h2 { font-size: clamp(2rem, 3.6vw, 3.1rem); }
-h3 { font-size: clamp(1.3rem, 2vw, 1.65rem); font-weight: 600; }
+h1 { font-size: clamp(2.6rem, 5.6vw, 4.6rem); font-weight: 700; letter-spacing: -0.03em; }
+h2 { font-size: clamp(1.9rem, 3.4vw, 2.8rem); }
+h3 { font-size: clamp(1.25rem, 1.9vw, 1.5rem); font-weight: 600; letter-spacing: -0.01em; }
 
 p { line-height: 1.65; color: var(--text-muted); max-width: 62ch; }
 p.lead { font-size: clamp(1.05rem, 1.5vw, 1.2rem); color: var(--text); max-width: 56ch; }
 
 .label {
   font-size: 0.82rem;
-  color: var(--text-muted);
-  font-weight: 500;
+  color: var(--red);
+  font-weight: 600;
 }
 
 .rule {
@@ -118,6 +124,16 @@ p.lead { font-size: clamp(1.05rem, 1.5vw, 1.2rem); color: var(--text); max-width
   margin: 0;
 }
 .rule--on-ink { border-top-color: var(--line-on-ink); }
+
+/* Lijn die zichzelf "intekent" zodra hij in beeld scrollt */
+.line-draw {
+  width: 64px;
+  height: 3px;
+  background: var(--red);
+  margin-block: 20px;
+}
+.js-reveal .line-draw { width: 0; transition: width 0.9s var(--ease-out); }
+.js-reveal .line-draw.is-visible { width: 64px; }
 
 /* ==========================================================================
    Knoppen en links
@@ -130,27 +146,32 @@ p.lead { font-size: clamp(1.05rem, 1.5vw, 1.2rem); color: var(--text); max-width
   font-weight: 600;
   font-size: 0.98rem;
   border: 1.5px solid transparent;
-  transition: background 0.25s var(--ease), color 0.25s var(--ease), border-color 0.25s var(--ease);
+  transition: background 0.25s var(--ease), color 0.25s var(--ease), border-color 0.25s var(--ease), transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
   white-space: nowrap;
 }
-.btn-primary { background: var(--ink); color: var(--text-on-ink); }
-.btn-primary:hover { background: var(--red-deep); }
+.btn-primary { background: var(--red); color: #fff; }
+.btn-primary:hover { background: var(--red-deep); transform: translateY(-2px); box-shadow: 0 10px 24px -8px rgba(229,25,34,0.45); }
 .btn-outline { border-color: var(--ink); color: var(--ink); }
-.btn-outline:hover { background: var(--ink); color: var(--text-on-ink); }
+.btn-outline:hover { background: var(--ink); color: var(--text-on-ink); transform: translateY(-2px); }
 .btn-outline--on-ink { border-color: var(--text-on-ink-muted); color: var(--text-on-ink); }
-.btn-outline--on-ink:hover { background: var(--text-on-ink); color: var(--ink); border-color: var(--text-on-ink); }
+.btn-outline--on-ink:hover { background: var(--text-on-ink); color: var(--ink); border-color: var(--text-on-ink); transform: translateY(-2px); }
+.btn-outline--on-red { border-color: rgba(255,255,255,0.6); color: #fff; }
+.btn-outline--on-red:hover { background: #fff; color: var(--red-deep); border-color: #fff; transform: translateY(-2px); }
+.btn-light { background: #fff; color: var(--red-deep); }
+.btn-light:hover { background: var(--ink); color: #fff; transform: translateY(-2px); box-shadow: 0 10px 24px -8px rgba(0,0,0,0.35); }
 
 .text-link {
   position: relative;
   font-weight: 600;
   padding-bottom: 2px;
+  color: var(--ink);
   background-image: linear-gradient(var(--red), var(--red));
-  background-size: 0% 1.5px;
+  background-size: 0% 2px;
   background-position: left bottom;
   background-repeat: no-repeat;
   transition: background-size 0.3s var(--ease);
 }
-.text-link:hover { background-size: 100% 1.5px; }
+.text-link:hover { background-size: 100% 2px; color: var(--red-deep); }
 
 /* ==========================================================================
    Header
@@ -183,9 +204,10 @@ p.lead { font-size: clamp(1.05rem, 1.5vw, 1.2rem); color: var(--text); max-width
 .brand img { width: 34px; height: 34px; object-fit: contain; }
 .brand span {
   font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 1.2rem;
+  font-weight: 700;
+  font-size: 1.15rem;
   color: var(--ink);
+  letter-spacing: -0.01em;
 }
 
 .main-nav ul { display: flex; align-items: center; gap: 36px; }
@@ -195,14 +217,16 @@ p.lead { font-size: clamp(1.05rem, 1.5vw, 1.2rem); color: var(--text); max-width
   color: var(--ink-soft);
   position: relative;
   padding-block: 4px;
+  transition: color 0.2s var(--ease);
 }
-.main-nav a[aria-current="page"] { color: var(--ink); font-weight: 600; }
+.main-nav a[aria-current="page"] { color: var(--red); font-weight: 600; }
+.main-nav a:hover { color: var(--red); }
 .main-nav a::after {
   content: '';
   position: absolute;
   left: 0; right: 100%;
   bottom: -2px;
-  height: 1.5px;
+  height: 2px;
   background: var(--red);
   transition: right 0.25s var(--ease);
 }
@@ -211,6 +235,7 @@ p.lead { font-size: clamp(1.05rem, 1.5vw, 1.2rem); color: var(--text); max-width
 
 .header-actions { display: flex; align-items: center; gap: 18px; flex-shrink: 0; }
 .header-actions .btn { padding: 12px 24px; font-size: 0.92rem; }
+.header-actions .btn-outline:hover { color: var(--red); border-color: var(--red); background: transparent; }
 
 .menu-toggle {
   display: none;
@@ -221,7 +246,8 @@ p.lead { font-size: clamp(1.05rem, 1.5vw, 1.2rem); color: var(--text); max-width
   flex-direction: column;
   gap: 5px;
 }
-.menu-toggle span { display: block; width: 22px; height: 1.5px; background: var(--ink); transition: transform 0.3s var(--ease), opacity 0.3s var(--ease); }
+.menu-toggle span { display: block; width: 22px; height: 2px; background: var(--ink); transition: transform 0.3s var(--ease), opacity 0.3s var(--ease), background 0.2s var(--ease); }
+.menu-toggle:hover span { background: var(--red); }
 .menu-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
 .menu-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
 .menu-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
@@ -236,17 +262,21 @@ p.lead { font-size: clamp(1.05rem, 1.5vw, 1.2rem); color: var(--text); max-width
   flex-direction: column;
   gap: 4px;
   transform: translateX(100%);
-  transition: transform 0.35s var(--ease);
+  transition: transform 0.4s var(--ease);
   overflow-y: auto;
 }
 .mobile-nav.is-open { transform: translateX(0); }
 .mobile-nav a {
   font-family: var(--font-display);
-  font-size: 1.7rem;
-  font-weight: 500;
+  font-weight: 600;
+  font-size: 1.6rem;
   padding-block: 13px;
   border-bottom: 1px solid var(--line);
+  display: block;
+  transition: color 0.2s var(--ease), padding-left 0.2s var(--ease);
 }
+.mobile-nav a:hover,
+.mobile-nav a[aria-current="page"] { color: var(--red); padding-left: 8px; }
 .mobile-nav .btn { margin-top: 26px; align-self: flex-start; }
 
 /* ==========================================================================
@@ -257,10 +287,10 @@ p.lead { font-size: clamp(1.05rem, 1.5vw, 1.2rem); color: var(--text); max-width
   font-size: 0.86rem;
   color: var(--text-muted);
 }
-.breadcrumbs a { color: var(--text-muted); }
-.breadcrumbs a:hover { color: var(--ink); }
+.breadcrumbs a { color: var(--text-muted); transition: color 0.2s var(--ease); }
+.breadcrumbs a:hover { color: var(--red); }
 .breadcrumbs .sep { margin-inline: 8px; color: var(--line); }
-.breadcrumbs [aria-current="page"] { color: var(--ink); font-weight: 500; }
+.breadcrumbs [aria-current="page"] { color: var(--ink); font-weight: 600; }
 
 /* ==========================================================================
    Page header (voor onderliggende pagina's)
@@ -268,15 +298,16 @@ p.lead { font-size: clamp(1.05rem, 1.5vw, 1.2rem); color: var(--text); max-width
 .page-header {
   padding-block: clamp(32px, 6vw, 72px) clamp(40px, 6vw, 72px);
   border-bottom: 1px solid var(--line);
+  position: relative;
 }
 .page-header .label { margin-bottom: 16px; display: block; }
-.page-header h1 { max-width: 18ch; }
+.page-header h1 { max-width: 20ch; }
 .page-header p.lead { margin-top: 22px; }
 
 /* ==========================================================================
    Hero (homepage)
    ========================================================================== */
-.hero { padding-block: clamp(40px, 6vw, 72px) 0; }
+.hero { padding-block: clamp(40px, 6vw, 72px) 0; overflow: hidden; }
 .hero-grid {
   display: grid;
   grid-template-columns: 1.4fr 1fr;
@@ -288,17 +319,24 @@ p.lead { font-size: clamp(1.05rem, 1.5vw, 1.2rem); color: var(--text); max-width
 .hero-actions { display: flex; align-items: center; gap: 24px; margin-top: 36px; flex-wrap: wrap; }
 
 .hero-figure { position: relative; }
+.hero-figure::before {
+  content: '';
+  position: absolute;
+  top: 18px; left: 18px;
+  width: 100%; height: 100%;
+  background: var(--red);
+  z-index: -1;
+}
 .hero-figure img {
   width: 100%;
   aspect-ratio: 4/5;
   object-fit: cover;
   object-position: 50% 25%;
+  will-change: transform;
 }
 .hero-figure figcaption {
-  margin-top: 12px;
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: 0.92rem;
+  margin-top: 14px;
+  font-size: 0.88rem;
   color: var(--text-muted);
 }
 
@@ -313,20 +351,23 @@ p.lead { font-size: clamp(1.05rem, 1.5vw, 1.2rem); color: var(--text); max-width
 .usp-row span em { font-style: normal; color: var(--text-muted); font-weight: 400; }
 
 /* ==========================================================================
-   Secties — algemeen
+   Secties, algemeen
    ========================================================================== */
 .section { padding-block: clamp(64px, 9vw, 128px); }
 .section--tight { padding-block: clamp(48px, 7vw, 96px); }
 .section--ink { background: var(--ink); color: var(--text-on-ink); }
 .section--ink p { color: var(--text-on-ink-muted); }
 .section--stone { background: var(--stone); }
+.section--red { background: var(--red); color: #fff; }
+.section--red p { color: rgba(255,255,255,0.85); }
+.section--red .label { color: rgba(255,255,255,0.75); }
 
 .section-head { max-width: 680px; }
 .section-head h2 { margin-top: 14px; }
 .section-head p.lead { margin-top: 20px; }
 
 /* ==========================================================================
-   Sticky scroll-vertelling — Training / Advies / Management
+   Sticky scroll-vertelling: Training, Advies, Management (homepage)
    ========================================================================== */
 .story {
   display: grid;
@@ -363,10 +404,12 @@ p.lead { font-size: clamp(1.05rem, 1.5vw, 1.2rem); color: var(--text); max-width
 .story-panel:first-child { border-top: none; }
 .story-panel .story-number {
   font-family: var(--font-display);
-  font-style: italic;
-  font-size: 1.05rem;
+  font-weight: 800;
+  font-size: 2.4rem;
+  letter-spacing: -0.02em;
   color: var(--red);
-  margin-bottom: 14px;
+  margin-bottom: 10px;
+  line-height: 1;
 }
 .story-panel h3 { font-size: clamp(1.6rem, 2.4vw, 2.1rem); }
 .story-panel p { margin-top: 16px; }
@@ -378,6 +421,74 @@ p.lead { font-size: clamp(1.05rem, 1.5vw, 1.2rem); color: var(--text); max-width
 .story-visual-stack img:not(:first-child) { opacity: 0; }
 .js-story .story-visual-stack img { position: absolute; inset: 0; }
 .js-story .story-visual-stack img:first-child { opacity: 1; }
+
+/* ==========================================================================
+   Dienstenpagina: grote, afwisselende secties per dienst
+   ========================================================================== */
+.dienst-hero {
+  padding-block: clamp(56px, 9vw, 110px);
+  position: relative;
+  overflow: hidden;
+}
+.dienst-hero h1 { max-width: 16ch; }
+.dienst-hero p.lead { margin-top: 22px; }
+
+.dienst-block {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: clamp(40px, 6vw, 96px);
+  padding-block: clamp(64px, 10vw, 140px);
+  border-top: 1px solid var(--line);
+  position: relative;
+}
+.dienst-block:nth-child(even) { flex-direction: row-reverse; }
+.dienst-block:nth-child(odd) { background: var(--paper); }
+.dienst-block:nth-child(even) { background: var(--stone); }
+
+.dienst-media { flex: 1 1 420px; position: relative; }
+.dienst-media::before {
+  content: '';
+  position: absolute;
+  top: -16px; left: -16px;
+  width: 72px; height: 72px;
+  border-top: 4px solid var(--red);
+  border-left: 4px solid var(--red);
+}
+.dienst-block:nth-child(even) .dienst-media::before {
+  left: auto; right: -16px;
+  border-left: none; border-right: 4px solid var(--red);
+}
+.dienst-media img {
+  width: 100%;
+  aspect-ratio: 4/5;
+  object-fit: cover;
+  transition: transform 0.7s var(--ease);
+  will-change: transform;
+}
+.dienst-media:hover img { transform: scale(1.045); }
+
+.dienst-body { flex: 1 1 420px; }
+.dienst-number {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(3.4rem, 7vw, 6rem);
+  line-height: 0.85;
+  letter-spacing: -0.03em;
+  color: var(--red);
+}
+.dienst-body h2 { margin-top: 8px; }
+.dienst-body p.lead { margin-top: 18px; }
+.dienst-body p { margin-top: 14px; }
+.dienst-body .text-link { margin-top: 22px; display: inline-block; }
+
+.dienst-cta {
+  padding-block: clamp(72px, 10vw, 130px);
+  text-align: center;
+}
+.dienst-cta h2 { max-width: 20ch; margin-inline: auto; }
+.dienst-cta p.lead { margin: 18px auto 0; text-align: center; }
+.dienst-cta .hero-actions { justify-content: center; margin-top: 32px; }
 
 /* ==========================================================================
    Citaat / editorial quote
@@ -392,29 +503,33 @@ p.lead { font-size: clamp(1.05rem, 1.5vw, 1.2rem); color: var(--text); max-width
 blockquote {
   margin: 0;
   font-family: var(--font-display);
-  font-weight: 500;
-  font-style: italic;
+  font-weight: 600;
   font-size: clamp(1.5rem, 2.8vw, 2.3rem);
   line-height: 1.3;
+  letter-spacing: -0.01em;
   color: var(--ink);
 }
 .section--ink blockquote { color: var(--text-on-ink); }
-.quote-attribution { margin-top: 26px; }
+.section--red blockquote { color: #fff; }
+.quote-attribution { margin-top: 26px; padding-left: 18px; border-left: 3px solid var(--red); }
 .quote-attribution strong { display: block; font-size: 1rem; }
 .quote-attribution span { display: block; color: var(--text-muted); font-size: 0.88rem; margin-top: 2px; }
 .section--ink .quote-attribution span { color: var(--text-on-ink-muted); }
+.section--red .quote-attribution span { color: rgba(255,255,255,0.75); }
+.section--red .quote-attribution { border-left-color: #fff; }
 
 /* ==========================================================================
-   Proces / stappen (echte sequentie → nummering gerechtvaardigd)
+   Proces / stappen (echte sequentie, nummering gerechtvaardigd)
    ========================================================================== */
 .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(24px, 4vw, 48px); }
-.step { border-top: 2px solid var(--ink); padding-top: 20px; }
-.step .step-number { font-family: var(--font-display); font-style: italic; font-size: 1.6rem; color: var(--red); }
+.step { border-top: 3px solid var(--red); padding-top: 20px; transition: transform 0.3s var(--ease); }
+.step:hover { transform: translateY(-4px); }
+.step .step-number { font-family: var(--font-display); font-weight: 800; font-size: 1.9rem; color: var(--red); letter-spacing: -0.02em; }
 .step h3 { margin-top: 10px; font-size: 1.2rem; }
 .step p { margin-top: 10px; }
 
 /* ==========================================================================
-   Diensten-overzicht (voor diensten-navigatie op andere pagina's)
+   Diensten-overzicht (compacte lijst, elders op de site)
    ========================================================================== */
 .service-list { display: flex; flex-direction: column; }
 .service-row {
@@ -423,14 +538,16 @@ blockquote {
   gap: 24px;
   align-items: center;
   padding-block: 32px;
+  padding-left: 18px;
   border-top: 1px solid var(--line);
-  transition: background 0.25s var(--ease);
+  border-left: 3px solid transparent;
+  transition: background 0.25s var(--ease), border-color 0.25s var(--ease), padding-left 0.25s var(--ease);
 }
 .service-list .service-row:last-child { border-bottom: 1px solid var(--line); }
 .service-row h3 { font-size: clamp(1.4rem, 2.2vw, 1.9rem); }
 .service-row p { margin: 0; }
 .service-row .text-link { white-space: nowrap; }
-.service-row:hover { background: var(--stone); }
+.service-row:hover { background: var(--red-tint); border-left-color: var(--red); padding-left: 28px; }
 
 /* ==========================================================================
    FAQ accordion
@@ -447,9 +564,11 @@ blockquote {
   text-align: left;
   font-family: var(--font-display);
   font-size: clamp(1.05rem, 1.6vw, 1.25rem);
-  font-weight: 500;
+  font-weight: 600;
   color: var(--ink);
+  transition: color 0.2s var(--ease);
 }
+.faq-question:hover { color: var(--red); }
 .faq-icon {
   flex-shrink: 0;
   width: 22px; height: 22px;
@@ -458,11 +577,11 @@ blockquote {
 .faq-icon::before, .faq-icon::after {
   content: '';
   position: absolute;
-  background: var(--ink);
+  background: var(--red);
   transition: transform 0.3s var(--ease), opacity 0.3s var(--ease);
 }
-.faq-icon::before { left: 0; top: 50%; width: 100%; height: 1.5px; transform: translateY(-50%); }
-.faq-icon::after { top: 0; left: 50%; width: 1.5px; height: 100%; transform: translateX(-50%); }
+.faq-icon::before { left: 0; top: 50%; width: 100%; height: 2px; transform: translateY(-50%); }
+.faq-icon::after { top: 0; left: 50%; width: 2px; height: 100%; transform: translateX(-50%); }
 .faq-question[aria-expanded="true"] .faq-icon::after { transform: translateX(-50%) rotate(90deg); opacity: 0; }
 
 .faq-answer {
@@ -490,10 +609,10 @@ blockquote {
   border: 1.5px solid var(--line);
   background: var(--paper);
   color: var(--text);
-  transition: border-color 0.2s var(--ease);
+  transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease);
 }
 .form-field input:focus,
-.form-field textarea:focus { border-color: var(--ink); outline: none; }
+.form-field textarea:focus { border-color: var(--red); outline: none; box-shadow: 0 0 0 3px var(--red-tint); }
 .form-field textarea { resize: vertical; min-height: 140px; }
 .form-note { font-size: 0.85rem; color: var(--text-muted); margin-top: 4px; }
 .form-submit { margin-top: 8px; }
@@ -512,28 +631,30 @@ blockquote {
    Contact-infoblok
    ========================================================================== */
 .contact-info { display: flex; flex-direction: column; gap: 22px; }
-.contact-info-item { display: flex; flex-direction: column; gap: 4px; }
+.contact-info-item { display: flex; flex-direction: column; gap: 4px; padding-left: 16px; border-left: 3px solid var(--red); }
 .contact-info-item .label { text-transform: none; }
-.contact-info-item a, .contact-info-item span.value { font-size: 1.1rem; font-weight: 600; color: var(--ink); }
+.contact-info-item a, .contact-info-item span.value { font-size: 1.1rem; font-weight: 600; color: var(--ink); transition: color 0.2s var(--ease); }
+.contact-info-item a:hover { color: var(--red); }
 
 /* ==========================================================================
-   CTA-band (ingetogen, geen vol-rode vlakken)
+   CTA-band: bewust een groot rood vlak voor extra karakter
    ========================================================================== */
-.cta-band { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.cta-band { background: var(--red); color: #fff; overflow: hidden; position: relative; }
 .cta-inner {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 32px;
   flex-wrap: wrap;
-  padding-block: clamp(40px, 6vw, 64px);
+  padding-block: clamp(48px, 7vw, 80px);
+  position: relative;
 }
-.cta-inner h2 { max-width: 14ch; }
+.cta-inner h2 { max-width: 16ch; color: #fff; }
 
 /* ==========================================================================
    Footer
    ========================================================================== */
-.site-footer { background: var(--ink); color: var(--text-on-ink-muted); padding-block: 64px 32px; }
+.site-footer { background: var(--ink); color: var(--text-on-ink-muted); padding-block: 64px 32px; border-top: 3px solid var(--red); }
 .footer-top {
   display: grid;
   grid-template-columns: 1.6fr 0.8fr 0.8fr 1fr;
@@ -543,10 +664,10 @@ blockquote {
 }
 .footer-brand .brand span { color: var(--text-on-ink); }
 .footer-brand p { margin-top: 18px; max-width: 32ch; color: var(--text-on-ink-muted); }
-.footer-col h4 { font-size: 0.85rem; font-weight: 600; color: var(--text-on-ink); margin-bottom: 18px; }
+.footer-col h4 { font-size: 0.85rem; font-weight: 700; color: var(--text-on-ink); margin-bottom: 18px; }
 .footer-col ul { display: flex; flex-direction: column; gap: 12px; }
 .footer-col a { font-size: 0.95rem; transition: color 0.2s var(--ease); }
-.footer-col a:hover { color: var(--text-on-ink); }
+.footer-col a:hover { color: var(--red); }
 .footer-bottom {
   display: flex;
   justify-content: space-between;
@@ -556,6 +677,8 @@ blockquote {
   padding-top: 26px;
   font-size: 0.85rem;
 }
+.footer-bottom a { transition: color 0.2s var(--ease); }
+.footer-bottom a:hover { color: var(--text-on-ink); }
 
 /* ==========================================================================
    404
@@ -564,45 +687,63 @@ blockquote {
 .error-page .label { margin-bottom: 18px; }
 
 /* ==========================================================================
-   Custom cursor (alleen fijne pointer, zie main.js)
+   Cursor: subtiel, alleen fijne pointer (zie main.js)
+   Bewust klein en terughoudend: een dunne ring volgt de muis vloeiend,
+   met een kleine vaste stip in het midden. Geen vulling, geen tekstlabel,
+   geen grote cirkel over knoppen heen.
    ========================================================================== */
 .cursor-dot {
   position: fixed;
   top: 0; left: 0;
-  width: 10px; height: 10px;
+  width: 6px; height: 6px;
   border-radius: 50%;
   background: var(--red);
   pointer-events: none;
   z-index: 9999;
   transform: translate(-50%, -50%);
-  transition: width 0.25s var(--ease), height 0.25s var(--ease), background 0.25s var(--ease), opacity 0.2s var(--ease);
-  mix-blend-mode: normal;
-}
-.cursor-dot.is-hovering {
-  width: 64px; height: 64px;
-  background: var(--ink);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.cursor-dot .cursor-label {
-  position: absolute;
-  color: var(--text-on-ink);
-  font-size: 0.72rem;
-  font-weight: 600;
-  white-space: nowrap;
-  opacity: 0;
   transition: opacity 0.2s var(--ease);
 }
-.cursor-dot.is-hovering .cursor-label { opacity: 1; }
+.cursor-ring {
+  position: fixed;
+  top: 0; left: 0;
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(229,25,34,0.55);
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.2s var(--ease), width 0.25s var(--ease), height 0.25s var(--ease), border-color 0.25s var(--ease);
+}
+.cursor-ring.is-hovering {
+  width: 42px; height: 42px;
+  border-color: var(--red);
+}
 
 /* Magnetische knoppen: de knop-inhoud verschuift licht, het klikvlak niet */
 .magnetic { position: relative; display: inline-block; }
-.magnetic .btn { transition: transform 0.2s var(--ease), background 0.25s var(--ease), color 0.25s var(--ease), border-color 0.25s var(--ease); }
+.magnetic .btn { transition: transform 0.2s var(--ease), background 0.25s var(--ease), color 0.25s var(--ease), border-color 0.25s var(--ease), box-shadow 0.25s var(--ease); }
 
 /* ==========================================================================
-   Scroll-reveal — puur CSS, geen JS-afhankelijke zichtbaarheid
+   Scroll-reveal systeem
+   Basisstatus (geen JS, of JS niet geladen): alles gewoon zichtbaar.
+   Pas wanneer .js-reveal op <html> staat (door main.js gezet, pas nadat
+   IntersectionObserver succesvol is opgezet) gelden de "voor-animatie"
+   regels hieronder. Zo kan content nooit permanent onzichtbaar blijven.
    ========================================================================== */
+.js-reveal [data-reveal] {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.js-reveal [data-reveal].is-visible { opacity: 1; transform: none; }
+.js-reveal [data-reveal="left"] { transform: translateX(-32px); }
+.js-reveal [data-reveal="left"].is-visible { transform: none; }
+.js-reveal [data-reveal="right"] { transform: translateX(32px); }
+.js-reveal [data-reveal="right"].is-visible { transform: none; }
+.js-reveal [data-reveal="scale"] { transform: scale(0.94); }
+.js-reveal [data-reveal="scale"].is-visible { transform: none; }
+
 @media (prefers-reduced-motion: no-preference) {
   .fade-in-up { animation: fadeInUp 0.8s var(--ease) both; }
 }
@@ -628,6 +769,10 @@ blockquote {
   .story-visual-stack img { position: relative !important; }
   .story-visual-stack img:not(:first-child) { display: none; }
 
+  .dienst-block,
+  .dienst-block:nth-child(even) { flex-direction: column; }
+  .dienst-media { max-width: 520px; }
+
   .quote-block { grid-template-columns: 1fr; }
   .quote-portrait { max-width: 280px; }
 
@@ -637,7 +782,7 @@ blockquote {
 
   .footer-top { grid-template-columns: 1fr 1fr; row-gap: 40px; }
 
-  .cursor-dot { display: none; }
+  .cursor-dot, .cursor-ring { display: none; }
 }
 
 @media (max-width: 640px) {
@@ -646,6 +791,7 @@ blockquote {
   .cta-inner { flex-direction: column; align-items: flex-start; }
   .footer-top { grid-template-columns: 1fr; }
   .footer-bottom { flex-direction: column; align-items: flex-start; }
+  .hero-figure::before { display: none; }
 }
 
 @media (max-width: 400px) {
@@ -654,5 +800,5 @@ blockquote {
 }
 
 @media (hover: none) {
-  .cursor-dot { display: none; }
+  .cursor-dot, .cursor-ring { display: none; }
 }

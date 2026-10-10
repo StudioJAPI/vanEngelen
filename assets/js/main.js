@@ -1,5 +1,5 @@
 /* ==========================================================================
-   VEMAT — main.js
+   VEMAT: main.js
    Progressive enhancement only: every feature here is additive.
    If this script fails to load or throws, the page must remain fully
    usable and readable (see styles.css comments for the CSS-only fallbacks
@@ -66,7 +66,9 @@
   })();
 
   /* ------------------------------------------------------------------ */
-  /* Custom cursor — desktop/mouse only                                   */
+  /* Cursor: subtiel, desktop/mouse only                                  */
+  /* Een kleine vaste stip plus een dunne ring die iets vertraagd volgt.  */
+  /* Geen vulling, geen tekstlabel, geen grote cirkel over knoppen heen.  */
   /* ------------------------------------------------------------------ */
   (function cursor() {
     if (isCoarsePointer || isNarrow) return;
@@ -74,16 +76,20 @@
     var dot = document.createElement("div");
     dot.className = "cursor-dot";
     dot.setAttribute("aria-hidden", "true");
-    var label = document.createElement("span");
-    label.className = "cursor-label";
-    dot.appendChild(label);
     dot.style.opacity = "0";
+
+    var ring = document.createElement("div");
+    ring.className = "cursor-ring";
+    ring.setAttribute("aria-hidden", "true");
+    ring.style.opacity = "0";
+
     document.body.appendChild(dot);
+    document.body.appendChild(ring);
 
     var x = window.innerWidth / 2;
     var y = window.innerHeight / 2;
-    var curX = x;
-    var curY = y;
+    var ringX = x;
+    var ringY = y;
     var visible = false;
 
     var usingKeyboard = false;
@@ -91,6 +97,7 @@
       if (e.key === "Tab") {
         usingKeyboard = true;
         dot.style.display = "none";
+        ring.style.display = "none";
       }
     });
 
@@ -98,44 +105,47 @@
       if (usingKeyboard) {
         usingKeyboard = false;
         dot.style.display = "";
+        ring.style.display = "";
       }
       x = e.clientX;
       y = e.clientY;
       if (!visible) {
         visible = true;
         dot.style.opacity = "1";
+        ring.style.opacity = "1";
       }
+      dot.style.transform = "translate(" + x + "px," + y + "px) translate(-50%,-50%)";
     });
 
     window.addEventListener("mouseleave", function () {
       dot.style.opacity = "0";
+      ring.style.opacity = "0";
     });
 
     var raf = function () {
-      curX += (x - curX) * 0.18;
-      curY += (y - curY) * 0.18;
-      dot.style.transform =
-        "translate(" + curX + "px," + curY + "px) translate(-50%,-50%)";
+      ringX += (x - ringX) * 0.22;
+      ringY += (y - ringY) * 0.22;
+      ring.style.transform =
+        "translate(" + ringX + "px," + ringY + "px) translate(-50%,-50%)";
       requestAnimationFrame(raf);
     };
     requestAnimationFrame(raf);
 
-    var hoverTargets = document.querySelectorAll("[data-cursor]");
+    var hoverTargets = document.querySelectorAll(
+      "a, button, input, textarea, .magnetic"
+    );
     hoverTargets.forEach(function (el) {
-      var text = el.getAttribute("data-cursor");
       el.addEventListener("mouseenter", function () {
-        dot.classList.add("is-hovering");
-        label.textContent = text || "";
+        ring.classList.add("is-hovering");
       });
       el.addEventListener("mouseleave", function () {
-        dot.classList.remove("is-hovering");
-        label.textContent = "";
+        ring.classList.remove("is-hovering");
       });
     });
   })();
 
   /* ------------------------------------------------------------------ */
-  /* Magnetic buttons — desktop/mouse only                                */
+  /* Magnetic buttons: desktop/mouse only                                 */
   /* ------------------------------------------------------------------ */
   (function magnetic() {
     if (isCoarsePointer || isNarrow || prefersReducedMotion) return;
@@ -160,10 +170,76 @@
   })();
 
   /* ------------------------------------------------------------------ */
-  /* Sticky storytelling — services section (and similar)                */
-  /* Default state (no JS / JS not yet run): first image shown via CSS.  */
-  /* With JS: swaps active image as each panel crosses the viewport      */
-  /* midpoint, using IntersectionObserver when available.                */
+  /* Scroll-reveal systeem                                                */
+  /* Basisstatus: alles zichtbaar (zie CSS). Pas als IntersectionObserver */
+  /* beschikbaar is en de observer succesvol is opgezet, zet dit script   */
+  /* de .js-reveal klasse op <html>. Daardoor kan content nooit per       */
+  /* ongeluk permanent onzichtbaar blijven.                               */
+  /* ------------------------------------------------------------------ */
+  (function reveal() {
+    if (!("IntersectionObserver" in window)) return;
+
+    var groups = document.querySelectorAll("[data-reveal-group]");
+    groups.forEach(function (group) {
+      var items = group.querySelectorAll("[data-reveal]");
+      items.forEach(function (item, i) {
+        item.style.setProperty("--reveal-delay", Math.min(i * 90, 360) + "ms");
+      });
+    });
+
+    var targets = document.querySelectorAll("[data-reveal]");
+    if (!targets.length) return;
+
+    var observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -8% 0px" }
+    );
+
+    targets.forEach(function (el) {
+      observer.observe(el);
+    });
+
+    /* Pas nu, na succesvolle opzet, de voor-animatiestatus activeren */
+    html.classList.add("js-reveal");
+  })();
+
+  /* ------------------------------------------------------------------ */
+  /* Subtiele parallax op hero- en verhaalafbeeldingen                   */
+  /* ------------------------------------------------------------------ */
+  (function parallax() {
+    if (prefersReducedMotion || isCoarsePointer) return;
+
+    var targets = document.querySelectorAll(
+      ".hero-figure img, .story-visual img, .dienst-media img"
+    );
+    if (!targets.length) return;
+
+    var update = function () {
+      var vh = window.innerHeight;
+      targets.forEach(function (img) {
+        var rect = img.getBoundingClientRect();
+        var center = rect.top + rect.height / 2;
+        var offset = (center - vh / 2) / vh;
+        var shift = Math.max(Math.min(offset * -18, 18), -18);
+        img.style.transform = "translateY(" + shift + "px)";
+      });
+      requestAnimationFrame(update);
+    };
+    requestAnimationFrame(update);
+  })();
+
+  /* ------------------------------------------------------------------ */
+  /* Sticky storytelling: services section (en vergelijkbare secties)    */
+  /* Default state (geen JS / JS nog niet actief): eerste foto via CSS.  */
+  /* Met JS: wisselt de actieve foto mee met het panel dat in beeld is,  */
+  /* via IntersectionObserver indien beschikbaar.                        */
   /* ------------------------------------------------------------------ */
   (function story() {
     var stories = document.querySelectorAll(".story");
@@ -239,23 +315,7 @@
   })();
 
   /* ------------------------------------------------------------------ */
-  /* Reveal-on-scroll refinement (optional, CSS already animates on      */
-  /* load via .fade-in-up; this just staggers items already in view      */
-  /* using a small delay set as a CSS variable — never gates visibility) */
-  /* ------------------------------------------------------------------ */
-  (function stagger() {
-    if (prefersReducedMotion) return;
-    var groups = document.querySelectorAll("[data-stagger]");
-    groups.forEach(function (group) {
-      var children = group.children;
-      Array.prototype.forEach.call(children, function (child, i) {
-        child.style.animationDelay = i * 80 + "ms";
-      });
-    });
-  })();
-
-  /* ------------------------------------------------------------------ */
-  /* Contact form — basic client-side status handling (Formspree-ready)  */
+  /* Contact form: basic client-side status handling (Formspree-ready)   */
   /* ------------------------------------------------------------------ */
   (function contactForm() {
     var form = document.querySelector("[data-contact-form]");
@@ -264,10 +324,9 @@
     var status = form.querySelector(".form-status");
 
     form.addEventListener("submit", function (e) {
-      // If the form's action is still a placeholder, keep default
-      // mailto-style behaviour and show a note rather than silently
-      // failing. Once a real Formspree endpoint is configured this
-      // branch simply won't trigger.
+      // Als de action nog een placeholder is, netjes afvangen in plaats
+      // van stil te falen. Zodra een echte Formspree-endpoint is
+      // ingesteld, wordt deze tak simpelweg niet meer aangeroepen.
       var action = form.getAttribute("action") || "";
       if (action.indexOf("FORMSPREE_ENDPOINT") > -1) {
         e.preventDefault();

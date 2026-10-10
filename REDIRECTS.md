@@ -1,4 +1,4 @@
-# Redirectplan — oude site naar nieuwe site
+# Redirectplan: oude site naar nieuwe site
 
 De huidige website (vemat.nl) gebruikt een paginastructuur per map
 (bijvoorbeeld `/Training/`). De nieuwe website gebruikt platte
@@ -7,7 +7,7 @@ bezoekers en zoekmachines op een foutmelding uitkomen, zijn alle oude
 adressen doorgestuurd naar hun nieuwe tegenhanger.
 
 Dit is al kant-en-klaar verwerkt in het bestand `_redirects` in deze
-ZIP (Cloudflare Pages leest dit bestand automatisch in — er hoeft
+ZIP (Cloudflare Pages leest dit bestand automatisch in: er hoeft
 niets handmatig te worden ingesteld, zolang de site op Cloudflare
 Pages wordt gehost).
 
