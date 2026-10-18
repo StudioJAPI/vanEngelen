@@ -1,9 +1,7 @@
 /* ==========================================================================
    VEMAT: main.js
-   Progressive enhancement only: every feature here is additive.
-   If this script fails to load or throws, the page must remain fully
-   usable and readable (see styles.css comments for the CSS-only fallbacks
-   this script assumes).
+   Progressive enhancement: alles hier is aanvullend. Als dit script niet
+   laadt of faalt, blijft de pagina volledig bruikbaar en leesbaar.
    ========================================================================== */
 
 (function () {
@@ -16,69 +14,85 @@
   var yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = String(new Date().getFullYear());
 
-  var prefersReducedMotion = window.matchMedia(
-    "(prefers-reduced-motion: reduce)"
-  ).matches;
-  var isCoarsePointer = window.matchMedia("(hover: none)").matches;
-
   /* ------------------------------------------------------------------ */
-  /* Header: scrolled state + mobile nav                                 */
+  /* Header: scrolled state, menu op mobiel, submenu op desktop          */
   /* ------------------------------------------------------------------ */
   (function header() {
     var header = document.querySelector(".site-header");
     if (!header) return;
 
     var onScroll = function () {
-      if (window.scrollY > 8) {
-        header.classList.add("is-scrolled");
-      } else {
-        header.classList.remove("is-scrolled");
-      }
+      header.classList.toggle("is-scrolled", window.scrollY > 8);
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
 
     var toggle = document.querySelector(".menu-toggle");
     var mobileNav = document.querySelector(".mobile-nav");
-    if (!toggle || !mobileNav) return;
 
     var closeMenu = function () {
+      if (!toggle || !mobileNav) return;
       toggle.setAttribute("aria-expanded", "false");
+      toggle.setAttribute("aria-label", "Menu openen");
       mobileNav.classList.remove("is-open");
       document.body.classList.remove("nav-open");
     };
 
-    toggle.addEventListener("click", function () {
-      var expanded = toggle.getAttribute("aria-expanded") === "true";
-      toggle.setAttribute("aria-expanded", String(!expanded));
-      mobileNav.classList.toggle("is-open", !expanded);
-      document.body.classList.toggle("nav-open", !expanded);
-    });
+    if (toggle && mobileNav) {
+      toggle.addEventListener("click", function () {
+        var expanded = toggle.getAttribute("aria-expanded") === "true";
+        toggle.setAttribute("aria-expanded", String(!expanded));
+        toggle.setAttribute("aria-label", expanded ? "Menu openen" : "Menu sluiten");
+        mobileNav.classList.toggle("is-open", !expanded);
+        document.body.classList.toggle("nav-open", !expanded);
+      });
+      mobileNav.querySelectorAll("a").forEach(function (link) {
+        link.addEventListener("click", closeMenu);
+      });
+    }
 
-    mobileNav.querySelectorAll("a").forEach(function (link) {
-      link.addEventListener("click", closeMenu);
+    var subs = document.querySelectorAll(".has-sub");
+    var closeSubs = function () {
+      subs.forEach(function (s) {
+        s.classList.remove("is-open");
+        var b = s.querySelector(".sub-toggle");
+        if (b) b.setAttribute("aria-expanded", "false");
+      });
+    };
+    subs.forEach(function (sub) {
+      var btn = sub.querySelector(".sub-toggle");
+      if (!btn) return;
+      btn.addEventListener("click", function () {
+        var open = sub.classList.contains("is-open");
+        closeSubs();
+        if (!open) {
+          sub.classList.add("is-open");
+          btn.setAttribute("aria-expanded", "true");
+        }
+      });
+    });
+    document.addEventListener("click", function (e) {
+      if (!e.target.closest(".has-sub")) closeSubs();
     });
 
     document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape") closeMenu();
+      if (e.key === "Escape") {
+        closeMenu();
+        closeSubs();
+      }
     });
   })();
 
   /* ------------------------------------------------------------------ */
-  /* Scroll-reveal systeem                                                */
-  /* Basisstatus: alles zichtbaar (zie CSS). Pas als IntersectionObserver */
-  /* beschikbaar is en de observer succesvol is opgezet, zet dit script   */
-  /* de .js-reveal klasse op <html>. Daardoor kan content nooit per       */
-  /* ongeluk permanent onzichtbaar blijven.                               */
+  /* Scroll-reveal: lichte fade-in. Basisstatus is "zichtbaar"; de       */
+  /* voor-animatiestatus wordt pas actief na een geslaagde setup.        */
   /* ------------------------------------------------------------------ */
   (function reveal() {
     if (!("IntersectionObserver" in window)) return;
 
-    var groups = document.querySelectorAll("[data-reveal-group]");
-    groups.forEach(function (group) {
-      var items = group.querySelectorAll("[data-reveal]");
-      items.forEach(function (item, i) {
-        item.style.setProperty("--reveal-delay", Math.min(i * 90, 360) + "ms");
+    document.querySelectorAll("[data-reveal-group]").forEach(function (group) {
+      group.querySelectorAll("[data-reveal]").forEach(function (item, i) {
+        item.style.setProperty("--reveal-delay", Math.min(i * 80, 320) + "ms");
       });
     });
 
@@ -94,84 +108,30 @@
           }
         });
       },
-      { threshold: 0.15, rootMargin: "0px 0px -8% 0px" }
+      { threshold: 0.12, rootMargin: "0px 0px -6% 0px" }
     );
-
-    targets.forEach(function (el) {
-      observer.observe(el);
-    });
-
-    /* Pas nu, na succesvolle opzet, de voor-animatiestatus activeren */
+    targets.forEach(function (el) { observer.observe(el); });
     html.classList.add("js-reveal");
   })();
 
   /* ------------------------------------------------------------------ */
-  /* Subtiele parallax op hero- en verhaalafbeeldingen                   */
+  /* Video: pas laden en afspelen na een klik op de afspeelknop          */
   /* ------------------------------------------------------------------ */
-  (function parallax() {
-    if (prefersReducedMotion || isCoarsePointer) return;
+  (function video() {
+    document.querySelectorAll("[data-video]").forEach(function (frame) {
+      var vid = frame.querySelector("video");
+      var play = frame.querySelector(".video-play");
+      if (!vid || !play) return;
 
-    var targets = document.querySelectorAll(
-      ".hero-figure img, .story-visual img, .dienst-media img"
-    );
-    if (!targets.length) return;
-
-    var update = function () {
-      var vh = window.innerHeight;
-      targets.forEach(function (img) {
-        var rect = img.getBoundingClientRect();
-        var center = rect.top + rect.height / 2;
-        var offset = (center - vh / 2) / vh;
-        var shift = Math.max(Math.min(offset * -18, 18), -18);
-        img.style.transform = "translateY(" + shift + "px)";
+      play.addEventListener("click", function () {
+        frame.classList.add("is-playing");
+        var p = vid.play();
+        if (p && p.catch) {
+          p.catch(function () { frame.classList.remove("is-playing"); });
+        }
       });
-      requestAnimationFrame(update);
-    };
-    requestAnimationFrame(update);
-  })();
-
-  /* ------------------------------------------------------------------ */
-  /* Sticky storytelling: services section (en vergelijkbare secties)    */
-  /* Default state (geen JS / JS nog niet actief): eerste foto via CSS.  */
-  /* Met JS: wisselt de actieve foto mee met het panel dat in beeld is,  */
-  /* via IntersectionObserver indien beschikbaar.                        */
-  /* ------------------------------------------------------------------ */
-  (function story() {
-    var stories = document.querySelectorAll(".story");
-    if (!stories.length) return;
-    if (!("IntersectionObserver" in window)) return;
-
-    stories.forEach(function (storyEl) {
-      var stack = storyEl.querySelector(".story-visual-stack");
-      var panels = storyEl.querySelectorAll(".story-panel");
-      if (!stack || !panels.length) return;
-
-      var images = stack.querySelectorAll("img, .ph");
-      if (images.length < 2) return;
-
-      storyEl.classList.add("js-story");
-
-      var activate = function (index) {
-        images.forEach(function (img, i) {
-          img.classList.toggle("is-active", i === index);
-        });
-      };
-
-      var observer = new IntersectionObserver(
-        function (entries) {
-          entries.forEach(function (entry) {
-            if (entry.isIntersecting) {
-              var index = Array.prototype.indexOf.call(panels, entry.target);
-              if (index > -1) activate(index);
-            }
-          });
-        },
-        { rootMargin: "-45% 0px -45% 0px", threshold: 0 }
-      );
-
-      panels.forEach(function (panel) {
-        observer.observe(panel);
-      });
+      vid.addEventListener("play", function () { frame.classList.add("is-playing"); });
+      vid.addEventListener("ended", function () { frame.classList.remove("is-playing"); });
     });
   })();
 
@@ -202,11 +162,7 @@
 
         question.setAttribute("aria-expanded", String(!expanded));
         item.classList.toggle("is-open", !expanded);
-        if (!expanded) {
-          answer.style.maxHeight = answer.scrollHeight + "px";
-        } else {
-          answer.style.maxHeight = null;
-        }
+        answer.style.maxHeight = !expanded ? answer.scrollHeight + "px" : null;
       });
     });
   })();

@@ -3,24 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Advies | Strategisch en organisatieadvies | Van Engelen</title>
+<title>Advies | Een blik van buiten bij complexe vraagstukken | VEMAT</title>
 <meta name="description" content="Begeleiding bij complexe adviestrajecten en strategische keuzes, met de blik van een onafhankelijke buitenstaander.">
 <link rel="canonical" href="https://vemat.nl/advies/">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="nl_NL">
-<meta property="og:title" content="Advies | Strategisch en organisatieadvies | Van Engelen">
+<meta property="og:title" content="Advies | Een blik van buiten bij complexe vraagstukken | VEMAT">
 <meta property="og:description" content="Begeleiding bij complexe adviestrajecten en strategische keuzes, met de blik van een onafhankelijke buitenstaander.">
 <meta property="og:url" content="https://vemat.nl/advies/">
-<meta property="og:image" content="https://vemat.nl/assets/images/logo-van-engelen.webp">
+<meta property="og:image" content="https://vemat.nl/assets/images/og-vemat.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta property="og:site_name" content="Van Engelen Management, Advies en Training">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#171512">
+<meta name="theme-color" content="#1b1a18">
 <link rel="icon" href="../favicon.ico" sizes="any">
 <link rel="icon" href="../favicon-48.png" type="image/png" sizes="48x48">
 <link rel="icon" href="../favicon-192.png" type="image/png" sizes="192x192">
 <link rel="apple-touch-icon" href="../apple-touch-icon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" href="../assets/fonts/newsreader-latin-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/hanken-grotesk-latin-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../assets/css/styles.css">
 <script type="application/ld+json">
 {
@@ -31,7 +33,7 @@
   "alternateName": "VEMAT",
   "url": "https://vemat.nl/",
   "logo": "https://vemat.nl/assets/images/logo-van-engelen.webp",
-  "image": "https://vemat.nl/assets/images/logo-van-engelen.webp",
+  "image": "https://vemat.nl/assets/images/og-vemat.jpg",
   "email": "frank@vemat.nl",
   "telephone": "+31622775253",
   "address": {
@@ -42,11 +44,8 @@
     "addressCountry": "NL"
   },
   "taxID": "85305804",
-  "description": "Van Engelen begeleidt organisaties al ruim 15 jaar met training, advies en interim management op het gebied van sales en commercie.",
-  "founder": {
-    "@type": "Person",
-    "name": "Frank van Engelen"
-  },
+  "description": "VEMAT ontwikkelt commerciële teams en leidinggevenden met praktijkgerichte training, coaching en borging, voor MKB en multinationals. Aangevuld met advies en interim management.",
+  "founder": {"@type": "Person", "name": "Frank van Engelen"},
   "areaServed": "NL",
   "sameAs": ["https://www.linkedin.com/company/van-engelen-management-advies-training/"]
 }
@@ -80,12 +79,6 @@
     {
       "@type": "ListItem",
       "position": 2,
-      "name": "Diensten",
-      "item": "https://vemat.nl/diensten/"
-    },
-    {
-      "@type": "ListItem",
-      "position": 3,
       "name": "Advies",
       "item": "https://vemat.nl/advies/"
     }
@@ -98,20 +91,19 @@
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="../" aria-label="Van Engelen, naar de homepage">
-        <img src="../assets/images/logo-van-engelen.webp" alt="Van Engelen" width="35" height="48">
+        <img src="../assets/images/logo-van-engelen-licht.webp" alt="Van Engelen" width="33" height="46">
       </a>
       <nav class="main-nav" aria-label="Hoofdmenu">
         <ul>
-          <li><a href="../">Home</a></li>
-          <li><a href="../diensten/" aria-current="page">Diensten</a></li>
-          <li><a href="../over-ons/">Over ons</a></li>
-          <li><a href="../#faq">Veelgestelde vragen</a></li>
-          <li><a href="../contact/">Contact</a></li>
+          <li><a href="../commerciele-ontwikkeling/">Commerciële ontwikkeling</a></li>
+          <li><a href="../management-leiderschap/">Management &amp; leiderschap</a></li>
+          <li class="has-sub"><button class="sub-toggle" aria-expanded="false" aria-controls="sub-meer" data-current="true">Meer diensten</button><ul class="subnav" id="sub-meer"><li><a href="../advies/" aria-current="page">Advies</a></li><li><a href="../interim-management/">Interim management</a></li></ul></li>
+          <li><a href="../over-ons/">Over Frank</a></li>
+          <li><a href="../cases/">Cases</a></li>
         </ul>
       </nav>
       <div class="header-actions">
-        <a class="btn btn-outline" href="mailto:frank@vemat.nl">frank@vemat.nl</a>
-        <div class="magnetic"><a class="btn btn-primary" href="../contact/">Plan een gesprek</a></div>
+        <a class="btn btn-primary" href="../contact/">Plan een kennismaking</a>
         <button class="menu-toggle" aria-expanded="false" aria-controls="mobile-nav" aria-label="Menu openen">
           <span></span><span></span><span></span>
         </button>
@@ -120,57 +112,101 @@
   </header>
   <nav class="mobile-nav" id="mobile-nav" aria-label="Mobiel menu">
     <ul>
-      <li><a href="../">Home</a></li>
-          <li><a href="../diensten/" aria-current="page">Diensten</a></li>
-          <li><a href="../over-ons/">Over ons</a></li>
-          <li><a href="../#faq">Veelgestelde vragen</a></li>
-          <li><a href="../contact/">Contact</a></li>
+      <li><a href="../commerciele-ontwikkeling/">Commerciële ontwikkeling</a></li>
+      <li><a href="../management-leiderschap/">Management &amp; leiderschap</a></li>
+      <li class="m-sub"><a href="../advies/" aria-current="page">Advies</a></li>
+      <li class="m-sub"><a href="../interim-management/">Interim management</a></li>
+      <li><a href="../over-ons/">Over Frank</a></li>
+      <li><a href="../cases/">Cases</a></li>
     </ul>
-    <a class="btn btn-primary" href="../contact/">Plan een gesprek</a>
+    <a class="btn btn-primary" href="../contact/">Plan een kennismaking</a>
   </nav>
   <nav class="breadcrumbs" aria-label="Broodkruimel">
-    <div class="container"><a href="../">Home</a><span class="sep" aria-hidden="true">/</span><a href="../diensten/">Diensten</a><span class="sep" aria-hidden="true">/</span><span aria-current="page">Advies</span></div>
+    <div class="container"><a href="../">Home</a><span class="sep" aria-hidden="true">/</span><span aria-current="page">Advies</span></div>
   </nav>
 <main id="main">
 
-  <div class="page-header container">
-    <span class="label fade-in-up">Dienst &middot; Advies</span>
-    <h1 class="fade-in-up">Externe kunde zorgt voor interne progressie.</h1>
-    <p class="lead fade-in-up">Een probleem zien is nog geen oplossing. Wie er middenin zit, wordt er vaak blind voor. Wij kijken ernaar met de blik van een buitenstaander.</p>
-  </div>
-
-  <section class="section">
-    <div class="container">
-      <div class="quote-block">
-        <figure class="hero-figure" style="margin:0;">
-          <img src="../assets/images/frank-advies.webp" alt="Frank van Engelen in gesprek tijdens een adviestraject">
-        </figure>
-        <div>
-          <span class="label" data-reveal>Onze rol</span>
-          <h2 data-reveal style="margin-top:14px;">Inzichten zijn geen oplossingen: wij leveren geen kant-en-klare antwoorden.</h2>
-          <p data-reveal style="margin-top:18px;">We begeleiden complexe adviestrajecten en strategische keuzes door achtergrond, expertise en ervaring uit andere organisaties mee te brengen naar uw vraagstuk. Dat is volgens ons essentieel voor echte verandering.</p>
-          <p data-reveal>In plaats van een oplossing over te nemen, inspireren we management, teams of afdelingen om die zelf te ontwikkelen. Zo bouwen we aan interne motivatie en collectief vertrouwen, voortbouwend op wat er al aan kwaliteit aanwezig is.</p>
-          <p data-reveal>Dat vraagt om geduld en om een goed oor: eerst luisteren naar wat er speelt, dan pas adviseren. Een advies dat niet aansluit bij de mensen die het moeten uitvoeren, blijft op papier staan.</p>
+  <section class="page-hero on-ink">
+    <div class="container page-hero-grid">
+      <div class="page-hero-copy">
+        <span class="label">Advies</span>
+        <h1>Externe kunde zorgt voor interne progressie.</h1>
+        <p class="lead">Een probleem zien is nog geen oplossing. Wie er middenin zit, wordt er vaak blind voor. Wij kijken ernaar met de blik van een buitenstaander.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="../contact/">Bespreek uw vraagstuk</a>
         </div>
+      </div>
+      <div class="page-hero-media page-hero-media--frame">
+        <img src="../assets/images/frank-advies.webp" width="1200" height="1800" alt="Frank van Engelen ontspannen in gesprek op de bank" loading="eager" fetchpriority="high" decoding="async" style="object-position:62% 40%">
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--sand">
+    <div class="container split split--top">
+      <div data-reveal>
+        <span class="label">Onze rol</span>
+        <h2>Inzichten zijn geen oplossingen. Wij leveren geen kant-en-klare antwoorden.</h2>
+      </div>
+      <div data-reveal>
+        <p class="lead">We begeleiden complexe adviestrajecten en strategische keuzes door achtergrond, expertise en ervaring uit andere organisaties mee te brengen naar uw vraagstuk.</p>
+        <p>In plaats van een oplossing over te nemen, inspireren we management, teams of afdelingen om die zelf te ontwikkelen. Zo bouwen we aan interne motivatie en collectief vertrouwen, voortbouwend op wat er al aan kwaliteit aanwezig is.</p>
+        <p>Dat vraagt om geduld en een goed oor: eerst luisteren naar wat er speelt, dan pas adviseren. Een advies dat niet aansluit bij de mensen die het moeten uitvoeren, blijft op papier staan.</p>
       </div>
     </div>
   </section>
 
   <section class="section section--stone">
-    <div class="container">
-      <div class="section-head" data-reveal>
+    <div class="container split split--top">
+      <div data-reveal>
         <span class="label">Wanneer advies helpt</span>
         <h2>Bij complexe vraagstukken en strategische keuzes.</h2>
-        <p class="lead">Denk aan situaties waarin een organisatie al langer tegen een vraagstuk aanloopt, maar er, juist door de gewenning, zelf lastig uitkomt. Onze toegevoegde waarde zit in het benutten van het potentieel dat er al is, niet in het opleggen van een extern model.</p>
-        <p style="margin-top: 16px;">Dat kan gaan over een commerciële strategie die niet meer aansluit bij de markt, een organisatiestructuur die groei in de weg zit, of een team dat vastloopt in oude gewoontes. In elk van die situaties geldt hetzelfde uitgangspunt: eerst begrijpen, dan pas adviseren.</p>
+        <p class="lead">Als een organisatie al langer tegen hetzelfde aanloopt en er, juist door de gewenning, zelf lastig uitkomt. Onze toegevoegde waarde is het benutten van het potentieel dat er al is, niet het opleggen van een extern model.</p>
+      </div>
+      <div data-reveal>
+        <ul class="check-list">
+          <li>Een commerciële strategie die niet meer aansluit bij de markt</li>
+          <li>Een organisatiestructuur die groei in de weg zit</li>
+          <li>Een team dat vastloopt in oude gewoontes</li>
+        </ul>
+        <p>In elk van die situaties geldt hetzelfde uitgangspunt: eerst begrijpen, dan pas adviseren.</p>
       </div>
     </div>
   </section>
 
-  <section class="cta-band">
-    <div class="container cta-inner">
-      <h2>Loopt u vast op een vraagstuk?</h2>
-      <div class="magnetic"><a class="btn btn-light" href="../contact/">Plan een gesprek</a></div>
+  <section class="section section--sand">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <span class="label">Verder kijken</span>
+        <h2>Advies is vaak het begin.</h2>
+      </div>
+      <div class="next-links">
+      <a class="next-link" href="../commerciele-ontwikkeling/" data-reveal>
+        <span class="label">Ook van VEMAT</span>
+        <h3>Commerciële ontwikkeling</h3>
+        <p>Van advies naar gedrag: het commerciële team gaat het anders doen.</p>
+        <span class="arrow-link">Lees verder</span>
+      </a>
+      <a class="next-link" href="../management-leiderschap/" data-reveal>
+        <span class="label">Ook van VEMAT</span>
+        <h3>Management &amp; leiderschap</h3>
+        <p>Leidinggevenden die de gekozen richting ook echt uitdragen.</p>
+        <span class="arrow-link">Lees verder</span>
+      </a>
+    </div>
+    </div>
+  </section>
+
+  <section class="section--ink on-ink">
+    <div class="container cta cta--solo">
+      <div class="cta-copy" data-reveal>
+        <h2>Loopt u vast op een vraagstuk?</h2>
+        <p class="lead">Vertel Frank waar u tegenaan loopt. Een kort gesprek is genoeg om te bepalen of een blik van buiten helpt.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="../contact/">Bespreek uw vraagstuk</a>
+          <a class="text-link" href="mailto:frank@vemat.nl">of mail naar frank@vemat.nl</a>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -179,24 +215,25 @@
     <div class="container">
       <div class="footer-top">
         <div class="footer-brand">
-          <a class="brand" href="../">
-            <img src="../assets/images/logo-van-engelen.webp" alt="" width="29" height="40">
-            <span>Van Engelen</span>
+          <a class="brand" href="../" aria-label="Van Engelen, naar de homepage">
+            <img src="../assets/images/logo-van-engelen-licht.webp" alt="Van Engelen" width="37" height="52" loading="lazy">
           </a>
-          <p>Management, advies en training voor organisaties die sneller en scherper willen groeien. Al ruim 15 jaar een onafhankelijke blik van buiten.</p>
+          <p>Commerciële ontwikkeling en leiderschapsontwikkeling met blijvend effect. Persoonlijk begeleid door Frank van Engelen.</p>
         </div>
         <div class="footer-col">
-          <h4>Diensten</h4>
+          <h4>Ontwikkeling</h4>
           <ul>
-            <li><a href="../training/">Training</a></li>
+            <li><a href="../commerciele-ontwikkeling/">Commerciële ontwikkeling</a></li>
+            <li><a href="../management-leiderschap/">Management &amp; leiderschap</a></li>
             <li><a href="../advies/">Advies</a></li>
-            <li><a href="../management/">Interim management</a></li>
+            <li><a href="../interim-management/">Interim management</a></li>
           </ul>
         </div>
         <div class="footer-col">
           <h4>Meer</h4>
           <ul>
-            <li><a href="../over-ons/">Over ons</a></li>
+            <li><a href="../over-ons/">Over Frank</a></li>
+            <li><a href="../cases/">Cases</a></li>
             <li><a href="../#faq">Veelgestelde vragen</a></li>
             <li><a href="../contact/">Contact</a></li>
           </ul>
@@ -208,7 +245,6 @@
             <li><a href="tel:+31622775253">06 22 77 52 53</a></li>
             <li>Boschlaan 10, 5591 HJ Heeze</li>
             <li><a class="li-link" href="https://www.linkedin.com/company/van-engelen-management-advies-training/" target="_blank" rel="noopener"><svg class="li-icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>LinkedIn</a></li>
-            <li><a href="../contact/">Stuur een bericht</a></li>
           </ul>
         </div>
       </div>

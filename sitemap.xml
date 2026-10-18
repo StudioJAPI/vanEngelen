@@ -6,43 +6,48 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://vemat.nl/diensten/</loc>
+    <loc>https://vemat.nl/commerciele-ontwikkeling/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://vemat.nl/training/</loc>
+    <loc>https://vemat.nl/management-leiderschap/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://vemat.nl/advies/</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vemat.nl/management/</loc>
+    <loc>https://vemat.nl/interim-management/</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://vemat.nl/over-ons/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://vemat.nl/cases/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://vemat.nl/contact/</loc>
-    <changefreq>yearly</changefreq>
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://vemat.nl/privacy/</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.1</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
   </url>
   <url>
     <loc>https://vemat.nl/algemene-voorwaarden/</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.1</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
   </url>
 </urlset>
