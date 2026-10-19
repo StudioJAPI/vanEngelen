@@ -808,7 +808,10 @@ h3.slide-title { font-size: clamp(1.9rem, 3.2vw, 2.9rem); line-height: 1.05; let
 .slide-visual--photo::after { display: none; }
 .slide-visual--photo .slide-no { color: var(--on-ink); left: auto; right: 16px; bottom: auto; top: 12px; opacity: 0.0; }
 @media (max-width: 960px) {
-  .slide-card--photo { grid-template-columns: 1fr; }
+  .slide-card--photo { grid-template-columns: minmax(0, 1fr); padding: 16px; gap: 20px; }
+  .slide-card--photo .slide-visual--photo { width: 100%; margin: 0; }
+  .slide-card--photo .slide-body { padding: 4px 8px 8px; }
+  .split--media-last > :first-child { order: 2; max-width: 420px; margin-inline: auto; }
   .slide-visual--photo { min-height: 0; aspect-ratio: 1 / 1; }
 }
 
