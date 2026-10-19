@@ -798,3 +798,13 @@ h3.slide-title { font-size: clamp(1.9rem, 3.2vw, 2.9rem); line-height: 1.05; let
 .on-ink .slide-card .slide-themes li { color: var(--muted); }
 .on-ink .slide-card :focus-visible { outline-color: var(--red-deep); }
 .showcase-viewport:focus-visible { outline: 2px solid var(--red-bright); outline-offset: -6px; }
+
+/* Slides met foto: vierkante afbeelding, gelijke kolommen */
+.slide-card--photo { grid-template-columns: minmax(0, 6.4fr) minmax(0, 5fr); min-height: 0; }
+.slide-visual--photo { background: var(--ink-deep); min-height: 540px; }
+.slide-visual--photo::after { display: none; }
+.slide-visual--photo .slide-no { color: var(--on-ink); left: auto; right: 16px; bottom: auto; top: 12px; opacity: 0.0; }
+@media (max-width: 960px) {
+  .slide-card--photo { grid-template-columns: 1fr; }
+  .slide-visual--photo { min-height: 0; aspect-ratio: 1 / 1; }
+}

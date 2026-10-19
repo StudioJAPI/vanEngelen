@@ -200,9 +200,9 @@
         li.setAttribute("role", "group");
         li.setAttribute("aria-roledescription", "slide");
         li.setAttribute("aria-label", (i + 1) + " van " + data.length);
-        var card = el("article", "slide-card");
+        var card = el("article", "slide-card" + (c.image ? " slide-card--photo" : ""));
 
-        var vis = el("div", "slide-visual");
+        var vis = el("div", "slide-visual" + (c.image ? " slide-visual--photo" : ""));
         if (c.image) {
           var im = el("img");
           im.src = P + c.image; im.alt = c.imageAlt || ""; im.loading = "lazy"; im.decoding = "async";
