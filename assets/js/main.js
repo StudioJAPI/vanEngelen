@@ -167,6 +167,172 @@
     });
   })();
 
+
+  /* ------------------------------------------------------------------ */
+  /* Praktijkverhalen-slider (/cases/). Leest window.VEMAT_CASES uit      */
+  /* cases-data.js. Zonder JavaScript staan de verhalen onder elkaar.     */
+  /* ------------------------------------------------------------------ */
+  (function showcase() {
+    var root = document.querySelector("[data-showcase]");
+    if (!root) return;
+    var viewport = root.querySelector(".showcase-viewport");
+    var track = root.querySelector(".showcase-track");
+    var controls = root.querySelector(".showcase-controls");
+    if (!viewport || !track) return;
+
+    var P = root.getAttribute("data-prefix") || "";
+    var data = (window.VEMAT_CASES || []).slice().sort(function (a, b) { return (a.order || 0) - (b.order || 0); });
+
+    function el(tag, cls, text) {
+      var n = document.createElement(tag);
+      if (cls) n.className = cls;
+      if (text != null) n.textContent = text;
+      return n;
+    }
+    function pad(n) { return (n < 10 ? "0" : "") + n; }
+
+    function build() {
+      if (!data.length) return;
+      track.textContent = "";
+      data.forEach(function (c, i) {
+        var li = el("li", "slide");
+        li.id = "case-" + c.id;
+        li.setAttribute("role", "group");
+        li.setAttribute("aria-roledescription", "slide");
+        li.setAttribute("aria-label", (i + 1) + " van " + data.length);
+        var card = el("article", "slide-card");
+
+        var vis = el("div", "slide-visual");
+        if (c.image) {
+          var im = el("img");
+          im.src = P + c.image; im.alt = c.imageAlt || ""; im.loading = "lazy"; im.decoding = "async";
+          vis.appendChild(im);
+        } else if (c.logo) {
+          vis.className += " slide-visual--logo";
+          var lg = el("img", "slide-logo");
+          lg.src = P + c.logo; lg.alt = c.organisation || ""; lg.loading = "lazy"; lg.decoding = "async";
+          vis.appendChild(lg);
+        } else {
+          vis.className += " slide-visual--mark";
+          vis.appendChild(el("span", "slide-mark", c.organisation || c.category));
+        }
+        vis.appendChild(el("span", "slide-no", pad(i + 1)));
+
+        var body = el("div", "slide-body");
+        body.appendChild(el("span", "slide-cat", c.category));
+        if (c.organisation) body.appendChild(el("h3", "slide-org", c.organisation));
+        var title = el(c.organisation ? "p" : "h3", "slide-title", c.title);
+        body.appendChild(title);
+        if (c.themes && c.themes.length) {
+          var ul = el("ul", "slide-themes");
+          c.themes.forEach(function (th) { ul.appendChild(el("li", null, th)); });
+          body.appendChild(ul);
+        }
+        body.appendChild(el("p", "slide-desc", c.description));
+        if (c.testimonial && c.testimonial.quote) {
+          var bq = el("blockquote", "slide-quote");
+          bq.appendChild(el("p", null, "\u201C" + c.testimonial.quote + "\u201D"));
+          bq.appendChild(el("cite", null, c.testimonial.name || ""));
+          body.appendChild(bq);
+        }
+        var a = el("a", "btn btn-primary slide-link", "Bekijk het verhaal op LinkedIn");
+        a.href = c.url; a.target = "_blank"; a.rel = "noopener noreferrer";
+        body.appendChild(a);
+
+        card.appendChild(vis); card.appendChild(body); li.appendChild(card);
+        track.appendChild(li);
+      });
+    }
+    build();
+
+    var slides = Array.prototype.slice.call(track.children);
+    var n = slides.length;
+    if (!n) return;
+    var idx = 0, dragDX = 0;
+    var counter = root.querySelector("[data-showcase-counter]");
+    var bar = root.querySelector("[data-showcase-bar]");
+    var prev = root.querySelector("[data-showcase-prev]");
+    var next = root.querySelector("[data-showcase-next]");
+    root.classList.add("is-ready");
+    if (controls) controls.hidden = false;
+
+    function offsetFor(i) {
+      var s = slides[i];
+      return viewport.clientWidth / 2 - (s.offsetLeft + s.offsetWidth / 2);
+    }
+    function render(animate) {
+      track.style.transition = animate === false ? "none" : "";
+      track.style.transform = "translate3d(" + (offsetFor(idx) + dragDX) + "px,0,0)";
+      slides.forEach(function (s, i) {
+        var on = i === idx;
+        s.classList.toggle("is-active", on);
+        s.setAttribute("aria-hidden", on ? "false" : "true");
+        if (on) s.removeAttribute("inert"); else s.setAttribute("inert", "");
+      });
+      if (counter) counter.textContent = pad(idx + 1) + " / " + pad(n);
+      if (bar) bar.style.transform = "scaleX(" + ((idx + 1) / n) + ")";
+      if (prev) prev.disabled = idx === 0;
+      if (next) next.disabled = idx === n - 1;
+    }
+    function go(i) {
+      idx = Math.max(0, Math.min(n - 1, i));
+      dragDX = 0;
+      render(true);
+    }
+    render(false);
+    window.addEventListener("resize", function () { render(false); });
+    window.addEventListener("load", function () { render(false); });
+
+    if (prev) prev.addEventListener("click", function () { go(idx - 1); });
+    if (next) next.addEventListener("click", function () { go(idx + 1); });
+
+    viewport.addEventListener("keydown", function (e) {
+      if (e.key === "ArrowRight") { e.preventDefault(); go(idx + 1); }
+      else if (e.key === "ArrowLeft") { e.preventDefault(); go(idx - 1); }
+      else if (e.key === "Home") { e.preventDefault(); go(0); }
+      else if (e.key === "End") { e.preventDefault(); go(n - 1); }
+    });
+
+    /* Klik op een naastgelegen slide brengt die naar het midden */
+    slides.forEach(function (s, i) {
+      s.addEventListener("click", function (e) {
+        if (i !== idx && !moved) { e.preventDefault(); go(i); }
+      });
+    });
+
+    /* Swipe en slepen */
+    var startX = 0, startY = 0, startT = 0, dragging = false, moved = false, locked = null;
+    viewport.addEventListener("pointerdown", function (e) {
+      if (e.pointerType === "mouse" && e.button !== 0) return;
+      startX = e.clientX; startY = e.clientY; startT = Date.now();
+      dragging = true; moved = false; locked = null;
+    });
+    viewport.addEventListener("pointermove", function (e) {
+      if (!dragging) return;
+      var dx = e.clientX - startX, dy = e.clientY - startY;
+      if (locked === null && (Math.abs(dx) > 8 || Math.abs(dy) > 8)) locked = Math.abs(dx) > Math.abs(dy) ? "x" : "y";
+      if (locked !== "x") return;
+      moved = true;
+      if ((idx === 0 && dx > 0) || (idx === n - 1 && dx < 0)) dx = dx / 3;
+      dragDX = dx;
+      viewport.classList.add("is-dragging");
+      render(false);
+    });
+    function endDrag(e) {
+      if (!dragging) return;
+      dragging = false;
+      viewport.classList.remove("is-dragging");
+      var dx = dragDX, dt = Date.now() - startT;
+      var flick = Math.abs(dx) > 30 && dt < 280;
+      if (moved && (Math.abs(dx) > 70 || flick)) go(idx + (dx < 0 ? 1 : -1));
+      else { dragDX = 0; render(true); }
+      setTimeout(function () { moved = false; }, 0);
+    }
+    viewport.addEventListener("pointerup", endDrag);
+    viewport.addEventListener("pointercancel", endDrag);
+    viewport.addEventListener("dragstart", function (e) { e.preventDefault(); });
+  })();
+
   /* ------------------------------------------------------------------ */
   /* Contactformulier: verzenden naar Formspree zonder paginaherlaad,    */
   /* daarna door naar de bedankpagina. Zonder JavaScript werkt het       */

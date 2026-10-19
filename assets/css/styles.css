@@ -709,3 +709,92 @@ p.lead { font-size: clamp(1.1rem, 1.5vw, 1.3rem); color: var(--text); line-heigh
 .js-reveal :is(.frank-media, .statement-media, .cta-media, .hero-media, .split-media--blend, .split-media--cutout)[data-reveal].is-visible img {
   opacity: 1;
 }
+
+/* Afsluitende uitspraak onder de vier stappen */
+.method-closing {
+  grid-column: 1 / -1;
+  margin-top: clamp(40px, 6vw, 88px); padding-top: clamp(28px, 4vw, 48px);
+  border-top: 1px solid var(--line);
+  font-family: var(--font-display); font-weight: 400; font-style: italic;
+  font-size: clamp(1.7rem, 3.6vw, 3rem); line-height: 1.18; letter-spacing: -0.012em;
+  color: var(--ink); max-width: 26ch;
+}
+
+/* ==========================================================================
+   Praktijkverhalen-slider
+   ========================================================================== */
+.showcase-head { max-width: 760px; }
+.showcase-note { margin-top: 14px; font-size: 0.9rem; color: var(--on-ink-muted); }
+
+.showcase-track { list-style: none; margin: clamp(32px, 5vw, 64px) 0 0; padding: 0; display: grid; gap: 28px; }
+.slide-card { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); background: var(--sand); color: var(--ink); border-radius: var(--radius); overflow: hidden; min-height: 520px; }
+
+.slide-visual { position: relative; background: var(--stone); display: grid; place-items: center; overflow: hidden; min-height: 280px; }
+.slide-visual img:not(.slide-logo) { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.slide-logo { width: min(64%, 320px); height: auto; max-height: 160px; object-fit: contain; }
+.slide-mark { font-family: var(--font-display); font-size: clamp(2.4rem, 5vw, 4.4rem); line-height: 1.02; letter-spacing: -0.02em; color: var(--ink); text-align: center; padding: 0 8%; text-wrap: balance; }
+.slide-no { position: absolute; left: clamp(18px, 2vw, 28px); bottom: clamp(14px, 1.8vw, 24px); font-family: var(--font-display); font-size: 1.1rem; color: var(--red-deep); letter-spacing: 0.02em; }
+.slide-visual::after { content: ""; position: absolute; left: 0; top: 0; width: 56px; height: 3px; background: var(--red); }
+
+.slide-body { padding: clamp(26px, 3.4vw, 52px); display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 0; }
+.slide-cat { font-size: 0.82rem; font-weight: 600; letter-spacing: 0.02em; color: var(--red-deep); }
+.slide-org { margin-top: 10px; font-family: var(--font-display); font-weight: 400; font-size: clamp(1.9rem, 3.2vw, 2.9rem); line-height: 1.05; letter-spacing: -0.02em; }
+.slide-title { margin-top: 10px; font-family: var(--font-display); font-weight: 400; font-size: clamp(1.15rem, 1.7vw, 1.5rem); line-height: 1.25; color: var(--ink); }
+h3.slide-title { font-size: clamp(1.9rem, 3.2vw, 2.9rem); line-height: 1.05; letter-spacing: -0.02em; }
+.slide-themes { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
+.slide-themes li { font-size: 0.78rem; padding: 4px 10px; border: 1px solid var(--line); border-radius: 999px; color: var(--muted); }
+.slide-desc { margin-top: 18px; color: var(--text); line-height: 1.6; max-width: 52ch; }
+.slide-quote { margin: 22px 0 0; padding-left: 16px; border-left: 2px solid var(--red); max-width: 52ch; }
+.slide-quote p { font-family: var(--font-display); font-style: italic; font-size: 1.12rem; line-height: 1.4; }
+.slide-quote cite { display: block; margin-top: 8px; font-style: normal; font-size: 0.85rem; color: var(--muted); }
+.slide-link { margin-top: 28px; }
+
+/* Controls (alleen zichtbaar met JavaScript) */
+.showcase-controls { display: flex; align-items: center; gap: clamp(16px, 3vw, 40px); margin-top: clamp(24px, 3vw, 40px); }
+.showcase-controls[hidden] { display: none; }
+.showcase-counter { font-family: var(--font-display); font-size: 1.5rem; letter-spacing: 0.01em; min-width: 5.2ch; }
+.showcase-progress { flex: 1; height: 2px; background: var(--line-ink); position: relative; overflow: hidden; }
+.showcase-progress span { position: absolute; inset: 0; background: var(--red-bright); transform-origin: left; transform: scaleX(0.2); transition: transform 0.7s var(--ease); }
+.showcase-buttons { display: flex; gap: 10px; }
+.showcase-btn { width: 52px; height: 52px; border-radius: 50%; border: 1px solid var(--line-ink); color: var(--on-ink); background: transparent; display: grid; place-items: center; cursor: pointer; transition: background 0.25s var(--ease), border-color 0.25s var(--ease), opacity 0.25s; }
+.showcase-btn:hover:not(:disabled) { background: var(--red); border-color: var(--red); }
+.showcase-btn:disabled { opacity: 0.3; cursor: default; }
+.showcase-btn svg { width: 20px; height: 20px; }
+
+/* Met JavaScript: één grote actieve slide, buren half zichtbaar */
+.showcase.is-ready .showcase-viewport { overflow: hidden; margin-top: clamp(32px, 5vw, 64px); touch-action: pan-y; cursor: grab; outline-offset: -2px; }
+.showcase.is-ready .showcase-viewport.is-dragging { cursor: grabbing; user-select: none; }
+.showcase.is-ready .showcase-track { display: flex; gap: clamp(16px, 2.4vw, 32px); margin: 0; transition: transform 0.85s var(--ease); will-change: transform; }
+.showcase.is-ready .slide { flex: none; width: min(1060px, 82vw); opacity: 0.32; transform: scale(0.955); transition: opacity 0.7s var(--ease), transform 0.85s var(--ease); cursor: pointer; }
+.showcase.is-ready .slide.is-active { opacity: 1; transform: none; cursor: auto; }
+.showcase.is-ready .slide:not(.is-active) .slide-card { pointer-events: none; }
+.showcase.is-ready .slide:not(.is-active):hover { opacity: 0.5; }
+.showcase.is-ready .slide .slide-body > * { opacity: 0; transform: translateY(10px); transition: opacity 0.6s var(--ease), transform 0.6s var(--ease); }
+.showcase.is-ready .slide.is-active .slide-body > * { opacity: 1; transform: none; }
+.showcase.is-ready .slide.is-active .slide-body > *:nth-child(2) { transition-delay: 0.06s; }
+.showcase.is-ready .slide.is-active .slide-body > *:nth-child(3) { transition-delay: 0.12s; }
+.showcase.is-ready .slide.is-active .slide-body > *:nth-child(4) { transition-delay: 0.18s; }
+.showcase.is-ready .slide.is-active .slide-body > *:nth-child(5) { transition-delay: 0.24s; }
+.showcase.is-ready .slide.is-active .slide-body > *:nth-child(6) { transition-delay: 0.3s; }
+.showcase.is-ready .slide:not(.is-active) .slide-body > * { transition-delay: 0s; }
+.showcase.is-ready .slide:not(.is-active) .slide-card { user-select: none; }
+
+@media (max-width: 960px) {
+  .slide-card { grid-template-columns: 1fr; min-height: 0; }
+  .slide-visual { min-height: 150px; }
+  .slide-mark { font-size: clamp(2rem, 9vw, 3rem); }
+  .showcase.is-ready .slide { width: 86vw; }
+  .showcase-btn { width: 46px; height: 46px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .showcase.is-ready .showcase-track, .showcase.is-ready .slide, .showcase.is-ready .slide .slide-body > *, .showcase-progress span { transition: none !important; }
+}
+
+/* Slide-kaarten zijn licht, ook binnen een donkere sectie */
+.on-ink .slide-card p { color: var(--text); }
+.on-ink .slide-card .slide-title { color: var(--ink); }
+.on-ink .slide-card .slide-cat { color: var(--red-deep); }
+.on-ink .slide-card .slide-quote cite { color: var(--muted); }
+.on-ink .slide-card .slide-themes li { color: var(--muted); }
+.on-ink .slide-card :focus-visible { outline-color: var(--red-deep); }
+.showcase-viewport:focus-visible { outline: 2px solid var(--red-bright); outline-offset: -6px; }

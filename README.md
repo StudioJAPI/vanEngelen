@@ -8,17 +8,14 @@ Home, Commerciële ontwikkeling, Management & leiderschap, Advies, Interim manag
 ## Opdrachtgevers: logo's toevoegen
 Opdrachtgevers staan nu als nette tekst in een raster (op de homepage, sectie `#opdrachtgevers`, en op de Cases-pagina). Officiële logo's zijn niet aangeleverd en worden niet nagemaakt. Vervang per opdrachtgever de tekst (`<span>Naam</span>` in een `<li class="client">`) door `<img src="assets/logos/naam.svg" alt="Naam" height="32" loading="lazy">`.
 
-## Cases toevoegen
-Op `cases/index.html` staat het blok "Uitgewerkte cases volgen". Vervang dat door per case:
-```html
-<article class="case">
-  <div><h3>Titel</h3><p>Organisatie</p></div>
-  <div><h4>Uitdaging</h4><p>...</p></div>
-  <div><h4>Aanpak</h4><p>...</p></div>
-  <div><h4>Resultaat</h4><p>...</p></div>
-</article>
-```
-Voeg alleen bevestigde cases toe.
+## Praktijkverhalen (slider op /cases/)
+De slider leest alle verhalen uit `assets/js/cases-data.js`. Een nieuw verhaal toevoegen = een blok kopiëren in dat bestand en invullen (uitleg staat bovenin het bestand). De slider past zichzelf aan, de pagina hoeft niet gewijzigd te worden.
+
+- Afbeelding toevoegen: zet een geoptimaliseerde .webp in `assets/cases/` en vul `image` en `imageAlt` in. Zolang `image` leeg is, toont de slide de naam of het logo.
+- Volgorde: via `order`.
+- Verwijderd LinkedIn-bericht: haal het blok weg of vervang de `url`. De slider blijft werken.
+- Er wordt niets van LinkedIn geladen tot een bezoeker op de knop klikt.
+- Let op: de HTML van de pagina bevat voor zoekmachines een kopie van de verhalen. Wijzig je alleen `cases-data.js`, dan toont de site direct de nieuwe versie, maar die kopie wordt pas bijgewerkt als de pagina opnieuw wordt gegenereerd.
 
 ## Testimonials toevoegen
 Plaats bevestigde quotes als:
