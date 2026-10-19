@@ -205,7 +205,7 @@
         var vis = el("div", "slide-visual" + (c.image ? " slide-visual--photo" : ""));
         if (c.image) {
           var im = el("img");
-          im.src = P + c.image; im.alt = c.imageAlt || ""; im.loading = "lazy"; im.decoding = "async";
+          im.src = P + c.image; im.alt = c.imageAlt || ""; im.loading = "eager"; im.decoding = "async";
           vis.appendChild(im);
         } else if (c.logo) {
           vis.className += " slide-visual--logo";
