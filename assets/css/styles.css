@@ -712,7 +712,7 @@ p.lead { font-size: clamp(1.1rem, 1.5vw, 1.3rem); color: var(--text); line-heigh
 
 /* Afsluitende uitspraak onder de vier stappen */
 .method-closing {
-  grid-column: 1 / -1;
+  position: relative; clear: both;
   margin-top: clamp(40px, 6vw, 88px); padding-top: clamp(28px, 4vw, 48px);
   border-top: 1px solid var(--line);
   font-family: var(--font-display); font-weight: 400; font-style: italic;
@@ -808,3 +808,8 @@ h3.slide-title { font-size: clamp(1.9rem, 3.2vw, 2.9rem); line-height: 1.05; let
   .slide-card--photo { grid-template-columns: 1fr; }
   .slide-visual--photo { min-height: 0; aspect-ratio: 1 / 1; }
 }
+
+/* Grotere hero-afbeelding (zwarte studioachtergrond, onderwerp klein in beeld) */
+.page-hero-media--big { overflow: hidden; }
+.page-hero-media--big img { width: 132%; max-width: none; margin-left: -16%; }
+@media (max-width: 960px) { .page-hero-media--big img { width: 125%; margin-left: -12.5%; } }
