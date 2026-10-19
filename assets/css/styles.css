@@ -800,8 +800,9 @@ h3.slide-title { font-size: clamp(1.9rem, 3.2vw, 2.9rem); line-height: 1.05; let
 .showcase-viewport:focus-visible { outline: 2px solid var(--red-bright); outline-offset: -6px; }
 
 /* Slides met foto: vierkante afbeelding, gelijke kolommen */
-.slide-card--photo { grid-template-columns: minmax(0, 6.4fr) minmax(0, 5fr); min-height: 0; }
-.slide-visual--photo { background: var(--ink-deep); min-height: 540px; }
+.slide-card--photo { grid-template-columns: minmax(0, 5.6fr) minmax(0, 5fr); min-height: 0; align-items: center; padding: 28px; gap: 12px; }
+.slide-visual--photo { background: var(--ink-deep); min-height: 0; aspect-ratio: 1 / 1; align-self: center; }
+.slide-visual--photo img:not(.slide-logo) { object-fit: contain; }
 .slide-visual--photo::after { display: none; }
 .slide-visual--photo .slide-no { color: var(--on-ink); left: auto; right: 16px; bottom: auto; top: 12px; opacity: 0.0; }
 @media (max-width: 960px) {
@@ -813,3 +814,4 @@ h3.slide-title { font-size: clamp(1.9rem, 3.2vw, 2.9rem); line-height: 1.05; let
 .page-hero-media--big { overflow: hidden; }
 .page-hero-media--big img { width: 132%; max-width: none; margin-left: -16%; }
 @media (max-width: 960px) { .page-hero-media--big img { width: 125%; margin-left: -12.5%; } }
+.slide-card--photo .slide-body { padding: 8px clamp(16px, 2.4vw, 36px); }
