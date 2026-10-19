@@ -820,3 +820,7 @@ h3.slide-title { font-size: clamp(1.9rem, 3.2vw, 2.9rem); line-height: 1.05; let
 .page-hero-media--big img { width: 132%; max-width: none; margin-left: -16%; }
 @media (max-width: 960px) { .page-hero-media--big img { width: 125%; margin-left: -12.5%; } }
 .slide-card--photo .slide-body { padding: 8px clamp(16px, 2.4vw, 36px); }
+
+.footer-credit { margin-top: 14px; font-size: 0.8rem; opacity: 0.95; }
+.footer-credit a { text-decoration: underline; text-underline-offset: 3px; transition: color 0.2s var(--ease); }
+.footer-credit a:hover { color: var(--on-ink); }
