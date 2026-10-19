@@ -213,22 +213,16 @@ p.lead { font-size: clamp(1.1rem, 1.5vw, 1.3rem); color: var(--text); line-heigh
 }
 .sub-toggle[aria-expanded="true"]::after { transform: rotate(225deg) translateY(-2px); }
 .main-nav .subnav {
-  position: absolute; top: calc(100% + 14px); left: -22px; min-width: 250px; padding: 10px;
-  display: flex; flex-direction: column; align-items: stretch; gap: 2px;
-  background: var(--ink-2); border: 1px solid var(--line-ink); border-top: 2px solid var(--red-bright);
-  border-radius: 4px; box-shadow: 0 24px 48px -18px rgba(0,0,0,0.65);
-  opacity: 0; visibility: hidden; transform: translateY(8px);
+  position: absolute; top: 100%; left: -20px; min-width: 220px; padding: 8px 0;
+  display: block;
+  background: var(--ink-2); border: 1px solid var(--line-ink);
+  opacity: 0; visibility: hidden; transform: translateY(6px);
   transition: opacity 0.22s var(--ease), transform 0.22s var(--ease), visibility 0.22s;
 }
-.subnav::before { content: ""; position: absolute; left: 0; right: 0; top: -16px; height: 16px; }
-.subnav li { display: block; }
-.main-nav .subnav a {
-  display: flex; width: 100%; padding: 13px 16px; border-radius: 3px; white-space: nowrap;
-  transition: background 0.18s var(--ease), color 0.18s var(--ease), padding 0.18s var(--ease);
-}
+.main-nav .subnav li { display: block; width: 100%; }
+.main-nav .subnav a { display: block; width: 100%; padding: 11px 22px; white-space: nowrap; }
 .main-nav .subnav a::after { display: none; }
-.main-nav .subnav a:hover, .main-nav .subnav a:focus-visible { background: rgba(255,255,255,0.06); color: #fff; padding-left: 22px; }
-.main-nav .subnav a[aria-current="page"] { color: #fff; background: rgba(255,255,255,0.04); box-shadow: inset 2px 0 0 var(--red-bright); }
+.main-nav .subnav a:hover { color: var(--red-bright); }
 .has-sub:hover .subnav, .has-sub:focus-within .subnav, .has-sub.is-open .subnav { opacity: 1; visibility: visible; transform: none; }
 
 .header-actions { display: flex; align-items: center; gap: 16px; flex-shrink: 0; }
