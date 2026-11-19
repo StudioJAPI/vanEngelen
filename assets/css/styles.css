@@ -824,3 +824,26 @@ h3.slide-title { font-size: clamp(1.9rem, 3.2vw, 2.9rem); line-height: 1.05; let
 .footer-credit { margin-top: 14px; font-size: 0.8rem; opacity: 0.95; }
 .footer-credit a { text-decoration: underline; text-underline-offset: 3px; transition: color 0.2s var(--ease); }
 .footer-credit a:hover { color: var(--on-ink); }
+
+/* ==========================================================================
+   Nieuwe fotografie: gewone foto's in een rustige lijst (geen blend-modes)
+   ========================================================================== */
+.hero-media, .statement-media, .frank-media, .cta-media, .page-hero-media, .split-media--blend, .split-media--cutout { align-self: center; }
+.hero-media img, .statement-media img, .frank-media img, .cta-media img,
+.page-hero-media img, .split-media--blend img, .split-media--cutout img {
+  mix-blend-mode: normal; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover;
+  border-radius: var(--radius); box-shadow: 0 40px 80px -42px rgba(0,0,0,0.65);
+}
+.hero-media { margin-right: 0; padding-block: clamp(32px, 4vw, 56px); max-width: 450px; justify-self: end; width: 100%; }
+.hero-media img { aspect-ratio: 4 / 5; }
+.page-hero-media { padding-block: clamp(32px, 5vw, 72px); max-width: 460px; justify-self: end; width: 100%; }
+.page-hero-media--photo img { aspect-ratio: 4 / 5; }
+.statement-media img { box-shadow: 0 30px 60px -40px rgba(0,0,0,0.45); }
+.frank-media, .cta-media { max-width: 480px; width: 100%; }
+.cta-media { padding-block: clamp(32px, 5vw, 64px); }
+.split-media--cutout img, .split-media--blend img { box-shadow: 0 30px 60px -40px rgba(0,0,0,0.5); }
+.pillar-media img { object-position: 50% 40%; }
+@media (max-width: 960px) {
+  .hero-media, .page-hero-media { justify-self: center; max-width: 440px; padding-top: 8px; }
+  .page-hero-media { margin-inline: auto; }
+}

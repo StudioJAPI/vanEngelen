@@ -35,3 +35,7 @@ Verzendt via Formspree naar `bedankt/`. Zie `PROJECTDOCUMENTATIE.md`.
 
 ## Redirects
 Zie `REDIRECTS.md` en `_redirects` (Cloudflare Pages).
+
+## Fotografie
+
+De foto's van Frank zijn gemaakt door Frans Claassen Fotografie (november 2026) en staan als `frank-<naam>-800.webp` en `frank-<naam>-1600.webp` in `assets/images/`. Het zijn gewone foto's (geen vrijgestelde achtergrond): ze staan in een rustige lijst met een lichte afronding, zonder blend-modes. Een foto vervangen? Zet dezelfde bestandsnaam in 800 en 1600 pixels breed (formaat 4:5, de twee foto's in de kaarten op de homepage 16:10) en publiceer opnieuw. De deelafbeelding `og-vemat.jpg` (1200 x 630) is gemaakt met het VEMAT-logo en een nieuwe foto.
