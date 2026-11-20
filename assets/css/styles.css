@@ -847,3 +847,27 @@ h3.slide-title { font-size: clamp(1.9rem, 3.2vw, 2.9rem); line-height: 1.05; let
   .hero-media, .page-hero-media { justify-self: center; max-width: 440px; padding-top: 8px; }
   .page-hero-media { margin-inline: auto; }
 }
+
+/* ==========================================================================
+   Over Frank: persoonlijk verhaal
+   ========================================================================== */
+.big-quote-wrap { max-width: 1040px; }
+.big-quote { font-family: var(--font-display); font-size: clamp(2.1rem, 5.2vw, 4.4rem); line-height: 1.1; letter-spacing: -0.02em; text-wrap: balance; max-width: 22ch; }
+.big-quote-cite { margin-top: 28px; color: var(--on-ink-muted, rgba(255,255,255,0.6)); font-size: 0.95rem; }
+.prose-grid { display: grid; grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr); gap: clamp(32px, 6vw, 96px); align-items: start; }
+.prose p { margin-top: 18px; max-width: 62ch; }
+.prose p:first-child { margin-top: 0; }
+.prose--wide { margin-top: 30px; }
+.prose .prose-strong, p.prose-strong { font-family: var(--font-display); font-size: clamp(1.4rem, 2.4vw, 1.9rem); line-height: 1.25; margin-top: 28px; }
+.pull-h { font-family: var(--font-display); font-style: italic; font-weight: 400; font-size: clamp(1.9rem, 3.6vw, 3rem); line-height: 1.15; letter-spacing: -0.015em; text-wrap: balance; }
+.signature { margin-top: 36px; font-size: 0.95rem; line-height: 1.6; opacity: 0.85; }
+.on-ink .prose--wide { margin-bottom: clamp(32px, 4vw, 56px); }
+.section--tight-top { padding-top: 0; }
+@media (max-width: 960px) {
+  .prose-grid { grid-template-columns: 1fr; }
+}
+.big-quote, .on-ink p.big-quote { color: var(--on-ink); }
+.pull, .pull-h, .prose p.prose-strong { color: var(--ink); }
+.on-ink .pull, .on-ink .pull-h { color: var(--on-ink); }
+.cta-copy p + p { margin-top: 18px; }
+.cta-copy .signature { color: var(--on-ink-muted); }
