@@ -885,3 +885,9 @@ h3.slide-title { font-size: clamp(1.9rem, 3.2vw, 2.9rem); line-height: 1.05; let
 .proof-case:hover img { transform: translateY(-3px); }
 .proof-case h3 { font-size: 1.25rem; line-height: 1.25; margin-top: 4px; }
 @media (max-width: 960px) { .proof-cases { grid-template-columns: 1fr; } .proof-case { display: grid; grid-template-columns: 110px 1fr; column-gap: 16px; align-items: start; } .proof-case img { grid-row: 1 / 5; } }
+
+/* Fotostrook (Over Frank) */
+.photo-strip { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(12px, 2vw, 24px); }
+.strip-item { margin: 0; }
+.strip-item img { width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; border-radius: var(--radius); box-shadow: 0 24px 50px -36px rgba(0,0,0,0.5); }
+@media (max-width: 760px) { .photo-strip { grid-template-columns: minmax(0, 1fr); } }
