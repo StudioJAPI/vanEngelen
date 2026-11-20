@@ -168,8 +168,8 @@ p.lead { font-size: clamp(1.1rem, 1.5vw, 1.3rem); color: var(--text); line-heigh
 .text-link:hover { color: var(--red-deep); }
 .on-ink .text-link:hover { color: var(--red-bright); }
 .arrow-link { display: inline-flex; align-items: center; gap: 10px; font-weight: 600; }
-.arrow-link::after { content: ""; width: 28px; height: 1.5px; background: currentColor; transition: width 0.3s var(--ease); position: relative; }
-.arrow-link:hover::after { width: 44px; }
+.arrow-link::after { content: ""; width: 7px; height: 7px; border-top: 2px solid currentColor; border-right: 2px solid currentColor; transform: rotate(45deg); transition: transform 0.3s var(--ease); flex: none; }
+.arrow-link:hover::after { transform: translateX(4px) rotate(45deg); }
 .arrow-link:hover { color: var(--red-deep); }
 .on-ink .arrow-link:hover { color: var(--red-bright); }
 
