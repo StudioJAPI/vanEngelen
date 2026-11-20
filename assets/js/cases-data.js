@@ -70,7 +70,7 @@ window.VEMAT_CASES = [
     "url": "https://lnkd.in/p/eDYgTfPt",
     "testimonial": {
       "quote": "Energiek, to-the-point en precies wat ons team nodig had. Frank weet met zijn energie en rollenspellen mensen in korte tijd grote stappen te laten zetten.",
-      "name": "Eigenaar van Table du Sud"
+      "name": "Teun Antonissen, directeur Table du Sud"
     }
   },
   {

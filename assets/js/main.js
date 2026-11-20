@@ -280,6 +280,13 @@
       render(true);
     }
     render(false);
+    (function fromHash() {
+      var h = (location.hash || "").replace("#", "");
+      if (!h) return;
+      for (var k = 0; k < slides.length; k++) {
+        if (slides[k].id === h) { idx = k; render(false); break; }
+      }
+    })();
     window.addEventListener("resize", function () { render(false); });
     window.addEventListener("load", function () { render(false); });
 
